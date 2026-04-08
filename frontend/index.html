@@ -1,0 +1,512 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Finyx helps you plan monthly spending, stay ahead of bills, and reach savings goals without spreadsheet stress.">
+    <title>Finyx — Smart Personal Finance Planner</title>
+    <link rel="stylesheet" href="css/base.css?v=4">
+    <link rel="stylesheet" href="css/landing.css?v=2">
+</head>
+<body class="landing-page">
+    <!-- Navigation -->
+    <nav class="landing-nav" id="mainNav">
+        <div class="nav-inner">
+            <a href="index.html" class="nav-logo">
+                <div class="nav-logo-icon">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M6 3h12l4 6-10 13L2 9z"></path><path d="M2 9h20"></path><path d="M10 3l-4 6 6 13 6-13-4-6"></path>
+                    </svg>
+                </div>
+                Finyx
+            </a>
+
+            <ul class="nav-links">
+                <li><a href="#features">Features</a></li>
+                <li><a href="#pricing">Pricing</a></li>
+                <li><a href="#how-it-works">How It Works</a></li>
+                <li><a href="#cta">Get Started</a></li>
+            </ul>
+
+            <div class="nav-actions">
+                <a href="login.html" class="btn btn-ghost">Log In</a>
+                <a href="signup.html" class="btn btn-primary">Sign Up Free</a>
+            </div>
+
+            <button class="nav-hamburger" id="navHamburger" aria-label="Toggle menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <div class="hero-cash-strip animate-fade-in">
+                <article class="cash-strip-card">
+                    <svg viewBox="0 0 120 80" class="cash-strip-svg" aria-hidden="true">
+                        <rect x="10" y="16" width="100" height="52" rx="10" fill="#14532d" opacity="0.65"></rect>
+                        <rect x="16" y="22" width="88" height="40" rx="8" fill="#23ad8d" opacity="0.78"></rect>
+                        <circle cx="60" cy="42" r="11" fill="#052e16" opacity="0.6"></circle>
+                        <text x="56" y="46" fill="#bbf7d0" font-size="12" font-family="DM Sans, sans-serif" font-weight="700">₹</text>
+                    </svg>
+                    <div class="cash-strip-meta">
+                        <h4>Cash Inflow</h4>
+                        <p>Salary + side income tracked monthly</p>
+                    </div>
+                </article>
+
+                <article class="cash-strip-card">
+                    <svg viewBox="0 0 120 80" class="cash-strip-svg" aria-hidden="true">
+                        <rect x="18" y="14" width="84" height="56" rx="10" fill="#1e293b" opacity="0.82"></rect>
+                        <rect x="24" y="20" width="72" height="12" rx="4" fill="#3ea7be" opacity="0.7"></rect>
+                        <rect x="24" y="38" width="44" height="8" rx="4" fill="#64748b"></rect>
+                        <rect x="24" y="50" width="28" height="8" rx="4" fill="#64748b"></rect>
+                        <circle cx="82" cy="53" r="12" fill="#d29a42" opacity="0.88"></circle>
+                        <text x="76" y="57" fill="#1f1300" font-size="11" font-family="DM Sans, sans-serif" font-weight="700">₹</text>
+                    </svg>
+                    <div class="cash-strip-meta">
+                        <h4>Bill Planning</h4>
+                        <p>Upcoming dues and payment calendar</p>
+                    </div>
+                </article>
+
+                <article class="cash-strip-card">
+                    <svg viewBox="0 0 120 80" class="cash-strip-svg" aria-hidden="true">
+                        <ellipse cx="60" cy="66" rx="30" ry="8" fill="#0f172a" opacity="0.55"></ellipse>
+                        <rect x="42" y="22" width="36" height="42" rx="8" fill="#1b8d72" opacity="0.88"></rect>
+                        <rect x="46" y="18" width="28" height="8" rx="4" fill="#8fdcca"></rect>
+                        <circle cx="60" cy="44" r="10" fill="#0b3f3a"></circle>
+                        <text x="55" y="48" fill="#99f6e4" font-size="11" font-family="DM Sans, sans-serif" font-weight="700">₹</text>
+                    </svg>
+                    <div class="cash-strip-meta">
+                        <h4>Savings Jar</h4>
+                        <p>Emergency and goal buckets growing</p>
+                    </div>
+                </article>
+            </div>
+
+            <div class="hero-content">
+                <div class="hero-text animate-fade-in-up">
+                    <div class="hero-badge">
+                        <span class="hero-badge-dot"></span>
+                        Built for Daily Money Planning
+                    </div>
+
+                    <h1>
+                        Plan Your Month.<br>
+                        Pay on Time.<br>
+                        <span class="highlight">Save with Confidence.</span>
+                    </h1>
+
+                    <p class="hero-description">
+                        Finyx is your everyday finance companion for budgeting, bill tracking,
+                        tax-aware planning, and goal progress. No trading noise, no complexity.
+                    </p>
+
+                    <div class="hero-cta">
+                        <a href="signup.html" class="btn btn-primary btn-lg">
+                            Start Free
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <line x1="5" y1="12" x2="19" y2="12"></line>
+                                <polyline points="12 5 19 12 12 19"></polyline>
+                            </svg>
+                        </a>
+                        <a href="#features" class="btn btn-outline btn-lg">Learn More</a>
+                    </div>
+
+                    <div class="hero-stats">
+                        <div class="hero-stat">
+                            <div class="hero-stat-value">1.2L+</div>
+                            <div class="hero-stat-label">Bills Managed</div>
+                        </div>
+                        <div class="hero-stat">
+                            <div class="hero-stat-value">38K+</div>
+                            <div class="hero-stat-label">Budgets Created</div>
+                        </div>
+                        <div class="hero-stat">
+                            <div class="hero-stat-value">₹8.4Cr</div>
+                            <div class="hero-stat-label">Savings Goals Planned</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="hero-visual animate-fade-in-up stagger-2">
+                    <div class="hero-mock">
+                        <div class="hero-card household-card">
+                            <div class="hero-card-header">
+                                <div>
+                                    <div class="hero-card-label">April Money Plan</div>
+                                    <div class="hero-card-balance">
+                                        <span class="currency">₹</span>52,000
+                                    </div>
+                                </div>
+                                <span class="badge badge-info">On Track</span>
+                            </div>
+                            <div class="budget-tiles">
+                                <div class="budget-tile">
+                                    <span>Essentials</span>
+                                    <strong>₹31,200</strong>
+                                    <small>60%</small>
+                                </div>
+                                <div class="budget-tile">
+                                    <span>Lifestyle</span>
+                                    <strong>₹11,900</strong>
+                                    <small>23%</small>
+                                </div>
+                                <div class="budget-tile">
+                                    <span>Savings</span>
+                                    <strong>₹8,900</strong>
+                                    <small>17%</small>
+                                </div>
+                            </div>
+
+                            <div class="hero-checklist">
+                                <div class="check-item complete">Rent paid</div>
+                                <div class="check-item complete">Electricity bill scheduled</div>
+                                <div class="check-item pending">Insurance due in 4 days</div>
+                            </div>
+                        </div>
+
+                        <div class="hero-floating-card card-1">
+                            <div class="floating-amount">Goal: Emergency Fund</div>
+                            <div class="floating-label">72% completed this month</div>
+                        </div>
+
+                        <div class="hero-floating-card card-2">
+                            <div class="floating-amount">Subscriptions</div>
+                            <div class="floating-label">3 renewals in next 7 days</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Money Visuals -->
+    <section class="money-visuals" id="money-visuals">
+        <div class="container">
+            <div class="section-header animate-fade-in-up">
+                <div class="section-label">Money Snapshots</div>
+                <h2 class="section-title">See Your Money, Not Market Noise</h2>
+                <p class="section-description">
+                    Visual cards focused on personal cashflow, bill planning, and goal savings.
+                </p>
+            </div>
+
+            <div class="money-visuals-grid">
+                <article class="money-visual-card animate-fade-in-up stagger-1">
+                    <div class="money-visual-illustration">
+                        <svg viewBox="0 0 360 220" class="money-svg" aria-hidden="true">
+                            <defs>
+                                <linearGradient id="cashflowBg" x1="0" y1="0" x2="1" y2="1">
+                                    <stop offset="0%" stop-color="#23ad8d" stop-opacity="0.22"></stop>
+                                    <stop offset="100%" stop-color="#5f85d9" stop-opacity="0.08"></stop>
+                                </linearGradient>
+                            </defs>
+                            <rect x="12" y="12" width="336" height="196" rx="18" fill="url(#cashflowBg)"></rect>
+                            <rect x="36" y="64" width="30" height="112" rx="8" fill="#1d4ed8" opacity="0.6"></rect>
+                            <rect x="82" y="90" width="30" height="86" rx="8" fill="#3ea7be" opacity="0.72"></rect>
+                            <rect x="128" y="42" width="30" height="134" rx="8" fill="#23ad8d"></rect>
+                            <rect x="174" y="78" width="30" height="98" rx="8" fill="#5f85d9" opacity="0.65"></rect>
+                            <rect x="220" y="54" width="30" height="122" rx="8" fill="#23ad8d"></rect>
+                            <rect x="266" y="100" width="30" height="76" rx="8" fill="#5f85d9" opacity="0.65"></rect>
+                            <rect x="66" y="26" width="210" height="30" rx="15" fill="#0f172a" opacity="0.68"></rect>
+                            <text x="84" y="46" fill="#8ce9df" font-size="13" font-weight="700" font-family="DM Sans, sans-serif">Monthly Cashflow</text>
+                            <rect x="198" y="114" width="116" height="56" rx="12" fill="#0f172a" opacity="0.86"></rect>
+                            <text x="212" y="138" fill="#b7fbf2" font-size="12" font-family="DM Sans, sans-serif">Net Savings</text>
+                            <text x="212" y="157" fill="#23ad8d" font-size="18" font-weight="700" font-family="DM Sans, sans-serif">₹8,900</text>
+                        </svg>
+                    </div>
+                    <div class="money-visual-meta">
+                        <h3>Cashflow Dashboard</h3>
+                        <p>Income, expense, and savings in one monthly view.</p>
+                    </div>
+                </article>
+
+                <article class="money-visual-card animate-fade-in-up stagger-2">
+                    <div class="money-visual-illustration">
+                        <svg viewBox="0 0 360 220" class="money-svg" aria-hidden="true">
+                            <rect x="20" y="18" width="320" height="184" rx="16" fill="#0f172a" opacity="0.88"></rect>
+                            <rect x="20" y="18" width="320" height="36" rx="16" fill="#1f2a44"></rect>
+                            <text x="38" y="41" fill="#8ce9df" font-size="13" font-weight="700" font-family="DM Sans, sans-serif">Bill Calendar</text>
+                            <rect x="38" y="72" width="146" height="112" rx="12" fill="#111b2d"></rect>
+                            <text x="56" y="95" fill="#9fb5d8" font-size="11" font-family="DM Sans, sans-serif">APR 2026</text>
+                            <rect x="52" y="106" width="26" height="22" rx="6" fill="#334155"></rect>
+                            <rect x="84" y="106" width="26" height="22" rx="6" fill="#334155"></rect>
+                            <rect x="116" y="106" width="26" height="22" rx="6" fill="#23ad8d"></rect>
+                            <rect x="148" y="106" width="26" height="22" rx="6" fill="#334155"></rect>
+                            <rect x="52" y="134" width="26" height="22" rx="6" fill="#334155"></rect>
+                            <rect x="84" y="134" width="26" height="22" rx="6" fill="#334155"></rect>
+                            <rect x="116" y="134" width="26" height="22" rx="6" fill="#d29a42"></rect>
+                            <rect x="148" y="134" width="26" height="22" rx="6" fill="#334155"></rect>
+                            <text x="124" y="122" fill="#00151a" font-size="10" font-weight="700" font-family="DM Sans, sans-serif">5</text>
+                            <text x="121" y="150" fill="#1f1300" font-size="10" font-weight="700" font-family="DM Sans, sans-serif">21</text>
+
+                            <rect x="202" y="72" width="122" height="44" rx="10" fill="#162235"></rect>
+                            <text x="216" y="93" fill="#9cd7ff" font-size="11" font-family="DM Sans, sans-serif">Electricity</text>
+                            <text x="216" y="109" fill="#5f85d9" font-size="12" font-weight="700" font-family="DM Sans, sans-serif">₹2,450</text>
+
+                            <rect x="202" y="126" width="122" height="44" rx="10" fill="#162235"></rect>
+                            <text x="216" y="147" fill="#9cd7ff" font-size="11" font-family="DM Sans, sans-serif">Insurance</text>
+                            <text x="216" y="163" fill="#d29a42" font-size="12" font-weight="700" font-family="DM Sans, sans-serif">Due in 4 days</text>
+                        </svg>
+                    </div>
+                    <div class="money-visual-meta">
+                        <h3>Bill Due Timeline</h3>
+                        <p>Know what is paid, upcoming, and urgent this week.</p>
+                    </div>
+                </article>
+
+                <article class="money-visual-card animate-fade-in-up stagger-3">
+                    <div class="money-visual-illustration">
+                        <svg viewBox="0 0 360 220" class="money-svg" aria-hidden="true">
+                            <rect x="12" y="16" width="336" height="188" rx="16" fill="#0f172a" opacity="0.86"></rect>
+                            <ellipse cx="180" cy="188" rx="132" ry="16" fill="#0b1220"></ellipse>
+
+                            <rect x="72" y="88" width="68" height="96" rx="12" fill="#1b2940"></rect>
+                            <rect x="146" y="66" width="68" height="118" rx="12" fill="#1f3350"></rect>
+                            <rect x="220" y="96" width="68" height="88" rx="12" fill="#1b2940"></rect>
+
+                            <rect x="80" y="106" width="52" height="68" rx="10" fill="#123146"></rect>
+                            <rect x="154" y="84" width="52" height="90" rx="10" fill="#124559"></rect>
+                            <rect x="228" y="114" width="52" height="60" rx="10" fill="#123146"></rect>
+
+                            <text x="87" y="126" fill="#9fc2e8" font-size="10" font-family="DM Sans, sans-serif">Bills</text>
+                            <text x="160" y="106" fill="#9ff2e8" font-size="10" font-family="DM Sans, sans-serif">Savings</text>
+                            <text x="235" y="134" fill="#9fc2e8" font-size="10" font-family="DM Sans, sans-serif">Wants</text>
+
+                            <text x="86" y="149" fill="#5f85d9" font-size="13" font-weight="700" font-family="DM Sans, sans-serif">₹31k</text>
+                            <text x="160" y="130" fill="#23ad8d" font-size="13" font-weight="700" font-family="DM Sans, sans-serif">₹9k</text>
+                            <text x="236" y="157" fill="#a78bfa" font-size="13" font-weight="700" font-family="DM Sans, sans-serif">₹12k</text>
+                        </svg>
+                    </div>
+                    <div class="money-visual-meta">
+                        <h3>Savings Buckets</h3>
+                        <p>Split money into needs, goals, and lifestyle buckets.</p>
+                    </div>
+                </article>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section class="features" id="features">
+        <!-- Decorative blobs -->
+        <div class="feature-blob blob-1"></div>
+        <div class="feature-blob blob-2"></div>
+        <div class="container" style="position: relative; z-index: 2;">
+            <div class="section-header animate-fade-in-up">
+                <div class="section-label">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon>
+                    </svg>
+                    Features
+                </div>
+                <h2 class="section-title">Everything You Need to<br>Take Control</h2>
+                <p class="section-description">
+                    Designed for real life: salary in, bills out, goals ahead, and tax season handled with calm clarity.
+                </p>
+            </div>
+
+            <div class="features-grid">
+                <div class="feature-card animate-fade-in-up stagger-1">
+                    <div class="feature-icon">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <rect x="1" y="4" width="22" height="16" rx="2" ry="2"></rect>
+                            <line x1="1" y1="10" x2="23" y2="10"></line>
+                        </svg>
+                    </div>
+                    <h3 class="feature-title">Expense Tracking</h3>
+                    <p class="feature-description">
+                        Track income and expenses by account, category, and merchant with simple daily entry.
+                    </p>
+                </div>
+
+                <div class="feature-card animate-fade-in-up stagger-2">
+                    <div class="feature-icon">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <line x1="18" y1="20" x2="18" y2="10"></line>
+                            <line x1="12" y1="20" x2="12" y2="4"></line>
+                            <line x1="6" y1="20" x2="6" y2="14"></line>
+                        </svg>
+                    </div>
+                    <h3 class="feature-title">Budget Planner</h3>
+                    <p class="feature-description">
+                        Set monthly limits for every category and get warning signals before overspending.
+                    </p>
+                </div>
+
+                <div class="feature-card animate-fade-in-up stagger-3">
+                    <div class="feature-icon">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M12 2a10 10 0 0 1 0 20 10 10 0 0 1 0-20z"></path>
+                            <path d="M12 6v6l4 2"></path>
+                        </svg>
+                    </div>
+                    <h3 class="feature-title">Bills and Subscriptions</h3>
+                    <p class="feature-description">
+                        Detect recurring payments, track due dates, and avoid surprise deductions.
+                    </p>
+                </div>
+
+                <div class="feature-card animate-fade-in-up stagger-4">
+                    <div class="feature-icon">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"></path>
+                            <path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"></path>
+                        </svg>
+                    </div>
+                    <h3 class="feature-title">AI Insights</h3>
+                    <p class="feature-description">
+                        Get practical suggestions on spending behavior, savings opportunities, and budget health.
+                    </p>
+                </div>
+
+                <div class="feature-card animate-fade-in-up stagger-5">
+                    <div class="feature-icon">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"></path>
+                        </svg>
+                    </div>
+                    <h3 class="feature-title">Savings Goals</h3>
+                    <p class="feature-description">
+                        Build emergency funds and life goals with timelines, progress bars, and contribution history.
+                    </p>
+                </div>
+
+                <div class="feature-card animate-fade-in-up stagger-6">
+                    <div class="feature-icon">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect>
+                            <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
+                        </svg>
+                    </div>
+                    <h3 class="feature-title">Tax Center (India)</h3>
+                    <p class="feature-description">
+                        Monitor 80C/80D usage, compare old vs new regime, and get tax-saving suggestions.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Pricing / Premium -->
+    <section class="premium-preview" id="pricing">
+        <div class="container">
+            <div class="section-header animate-fade-in-up">
+                <div class="section-label">Premium Plans</div>
+                <h2 class="section-title">Choose Your Plan</h2>
+                <p class="section-description">
+                    Start free for daily tracking, then unlock premium intelligence when you want deeper automation.
+                </p>
+            </div>
+
+            <div class="premium-grid">
+                <article class="premium-card basic animate-fade-in-up stagger-1">
+                    <div class="premium-tag">Basic</div>
+                    <h3>Free Forever</h3>
+                    <p class="premium-price">₹0<span>/month</span></p>
+                    <ul class="premium-list">
+                        <li>Manual transaction tracking</li>
+                        <li>Budgets and savings goals</li>
+                        <li>Dashboard + reports</li>
+                        <li>Tax summary (basic)</li>
+                    </ul>
+                    <a href="signup.html" class="btn btn-outline">Start Free</a>
+                </article>
+
+                <article class="premium-card premium animate-fade-in-up stagger-2">
+                    <div class="premium-tag">Premium</div>
+                    <h3>Advanced Finance OS</h3>
+                    <p class="premium-price">₹149<span>/month</span></p>
+                    <p class="premium-yearly">or ₹1499 / year</p>
+                    <ul class="premium-list">
+                        <li>Full AI insights + behavioral analysis</li>
+                        <li>Health score and simulator forecasts</li>
+                        <li>Subscription auto-detection</li>
+                        <li>Advanced tax estimation and suggestions</li>
+                        <li>Receipt scan and full CSV import</li>
+                    </ul>
+                    <a href="login.html?next=profile.html%3Fupgrade%3Dmonthly" class="btn btn-primary" data-premium-cta="monthly">Go Premium</a>
+                </article>
+            </div>
+        </div>
+    </section>
+
+    <!-- How It Works -->
+    <section class="how-it-works" id="how-it-works">
+        <div class="container">
+            <div class="section-header animate-fade-in-up">
+                <div class="section-label">How It Works</div>
+                <h2 class="section-title">Three Steps to<br>Financial Clarity</h2>
+            </div>
+
+            <div class="steps-grid">
+                <div class="step animate-fade-in-up stagger-1">
+                    <div class="step-number">1</div>
+                    <h3 class="step-title">Set Up in Minutes</h3>
+                    <p class="step-description">
+                        Create your profile, choose currency, and add your first account.
+                    </p>
+                </div>
+
+                <div class="step animate-fade-in-up stagger-2">
+                    <div class="step-number">2</div>
+                    <h3 class="step-title">Plan Monthly Cashflow</h3>
+                    <p class="step-description">
+                        Track transactions, set budget caps, and monitor recurring bills in one place.
+                    </p>
+                </div>
+
+                <div class="step animate-fade-in-up stagger-3">
+                    <div class="step-number">3</div>
+                    <h3 class="step-title">Improve Every Month</h3>
+                    <p class="step-description">
+                        Use insights, simulator forecasts, and goal planning to keep improving your financial habits.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="cta-section" id="cta">
+        <div class="cta-mesh-bg"></div>
+        <div class="container cta-glass-container">
+            <h2 class="cta-title animate-fade-in-up">Ready for Stress-Free Money Management?</h2>
+            <p class="cta-description animate-fade-in-up stagger-1">
+                Start with a free account and build a monthly routine that keeps your money clear, calm, and intentional.
+            </p>
+            <div class="cta-actions animate-fade-in-up stagger-2">
+                <a href="signup.html" class="btn btn-primary btn-lg">Create Free Account</a>
+                <a href="login.html" class="btn btn-outline btn-lg">Log In</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="landing-footer">
+        <div class="container">
+            <div class="footer-inner">
+                <p class="footer-copyright">&copy; 2026 Finyx. All rights reserved.</p>
+                <ul class="footer-links">
+                    <li><a href="#">Privacy</a></li>
+                    <li><a href="#">Terms</a></li>
+                    <li><a href="#">Contact</a></li>
+                </ul>
+            </div>
+        </div>
+    </footer>
+
+    <script src="js/utils.js?v=7"></script>
+    <script src="js/landing.js?v=3"></script>
+</body>
+</html>
+
+
+
+
+

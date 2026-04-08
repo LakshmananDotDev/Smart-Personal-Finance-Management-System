@@ -1,0 +1,613 @@
+/**
+ * Profile & Settings page logic
+ */
+(function () {
+    'use strict';
+
+    var user = null;
+    var isEditing = false;
+
+    document.addEventListener('DOMContentLoaded', init);
+
+    function init() {
+        loadProfile();
+        loadAccounts();
+        bindEvents();
+    }
+
+    /* ── Load profile data ── */
+    function loadProfile() {
+        API.getProfile().then(function (data) {
+            user = data;
+            API.setUser(data);
+            populateProfile();
+        }).catch(function () {
+            Utils.showToast('Failed to load profile', 'error');
+        });
+    }
+
+    function populateProfile() {
+        if (!user) return;
+
+        // Avatar
+        var avatarEl = document.getElementById('profileAvatar');
+        if (user.avatar) {
+            avatarEl.style.backgroundImage = 'url(' + user.avatar + ')';
+            avatarEl.style.backgroundSize = 'cover';
+            avatarEl.textContent = '';
+        } else {
+            avatarEl.textContent = (user.first_name || user.username || 'U').charAt(0).toUpperCase();
+        }
+
+        // Info
+        var name = ((user.first_name || '') + ' ' + (user.last_name || '')).trim() || user.username;
+        document.getElementById('profileName').textContent = name;
+        document.getElementById('profileEmail').textContent = user.email;
+
+        if (user.created_at) {
+            var d = new Date(user.created_at);
+            document.getElementById('profileJoined').textContent = 'Joined ' + d.toLocaleDateString('en-IN', { month: 'long', year: 'numeric' });
+        }
+
+        // Form fields
+        document.getElementById('firstName').value = user.first_name || '';
+        document.getElementById('lastName').value = user.last_name || '';
+        document.getElementById('emailField').value = user.email || '';
+        document.getElementById('avatarUrl').value = user.avatar || '';
+
+        // Preferences
+        document.getElementById('currencySelect').value = user.currency || 'INR';
+
+        var currentTheme = document.documentElement.getAttribute('data-theme') || 'dark';
+        document.getElementById('themeSelect').value = currentTheme;
+    }
+
+    /* ── Load accounts for default account picker ── */
+    function loadAccounts() {
+        API.getAccounts().then(function (data) {
+            var select = document.getElementById('defaultAccountSelect');
+            var accounts = data.results || data;
+            select.innerHTML = '<option value="">None</option>';
+            accounts.forEach(function (acc) {
+                var opt = document.createElement('option');
+                opt.value = acc.id;
+                opt.textContent = acc.name;
+                if (acc.is_default) opt.selected = true;
+                select.appendChild(opt);
+            });
+        }).catch(function () {});
+    }
+
+    /* ── Bind all events ── */
+    function bindEvents() {
+        // Edit personal info
+        document.getElementById('editPersonalBtn').addEventListener('click', toggleEdit);
+        document.getElementById('cancelPersonalBtn').addEventListener('click', cancelEdit);
+        document.getElementById('personalForm').addEventListener('submit', savePersonal);
+
+        // Preferences
+        document.getElementById('currencySelect').addEventListener('change', saveCurrency);
+        document.getElementById('themeSelect').addEventListener('change', saveTheme);
+        document.getElementById('defaultAccountSelect').addEventListener('change', saveDefaultAccount);
+
+        // Password
+        document.getElementById('passwordForm').addEventListener('submit', changePassword);
+
+        // Export – populate year dropdown and set defaults
+        (function initExportSelectors() {
+            var yearSel = document.getElementById('exportYear');
+            var now = new Date();
+            var curYear = now.getFullYear();
+            for (var y = curYear; y >= curYear - 5; y--) {
+                var opt = document.createElement('option');
+                opt.value = y;
+                opt.textContent = y;
+                yearSel.appendChild(opt);
+            }
+            yearSel.value = curYear;
+            document.getElementById('exportMonth').value = now.getMonth() + 1;
+
+            var typeSel = document.getElementById('exportType');
+            function toggleMonthVisibility() {
+                document.getElementById('exportMonth').style.display = typeSel.value === 'monthly' ? '' : 'none';
+            }
+            typeSel.addEventListener('change', toggleMonthVisibility);
+            toggleMonthVisibility();
+        })();
+        document.getElementById('exportDataBtn').addEventListener('click', exportData);
+
+        // Delete account
+        document.getElementById('deleteAccountBtn').addEventListener('click', function () {
+            document.getElementById('deleteConfirmModal').classList.add('active');
+            document.getElementById('deleteConfirmInput').value = '';
+            document.getElementById('confirmDeleteBtn').disabled = true;
+        });
+        document.getElementById('closeDeleteModal').addEventListener('click', closeDeleteModal);
+        document.getElementById('cancelDeleteBtn').addEventListener('click', closeDeleteModal);
+        document.getElementById('deleteConfirmInput').addEventListener('input', function () {
+            document.getElementById('confirmDeleteBtn').disabled = this.value !== 'DELETE';
+        });
+        document.getElementById('confirmDeleteBtn').addEventListener('click', deleteAccount);
+    }
+
+    /* ── Personal info edit ── */
+    function toggleEdit() {
+        isEditing = true;
+        document.getElementById('firstName').disabled = false;
+        document.getElementById('lastName').disabled = false;
+        document.getElementById('avatarUrl').disabled = false;
+        document.getElementById('personalActions').style.display = 'flex';
+        document.getElementById('editPersonalBtn').style.display = 'none';
+        document.getElementById('firstName').focus();
+    }
+
+    function cancelEdit() {
+        isEditing = false;
+        populateProfile();
+        document.getElementById('firstName').disabled = true;
+        document.getElementById('lastName').disabled = true;
+        document.getElementById('avatarUrl').disabled = true;
+        document.getElementById('personalActions').style.display = 'none';
+        document.getElementById('editPersonalBtn').style.display = '';
+    }
+
+    function savePersonal(e) {
+        e.preventDefault();
+        var data = {
+            first_name: document.getElementById('firstName').value.trim(),
+            last_name: document.getElementById('lastName').value.trim(),
+            avatar: document.getElementById('avatarUrl').value.trim()
+        };
+
+        API.updateProfile(data).then(function (updated) {
+            user = updated;
+            API.setUser(updated);
+            cancelEdit();
+            populateProfile();
+            Utils.showToast('Profile updated', 'success');
+            // Update sidebar name/avatar
+            if (window.populateUserInfo) window.populateUserInfo();
+        }).catch(function (err) {
+            Utils.showToast(err.message || 'Failed to update profile', 'error');
+        });
+    }
+
+    /* ── Preferences ── */
+    function saveCurrency() {
+        var currency = document.getElementById('currencySelect').value;
+        API.updateProfile({ currency: currency }).then(function (updated) {
+            user = updated;
+            API.setUser(updated);
+            Utils.showToast('Currency updated to ' + currency, 'success');
+        }).catch(function () {
+            Utils.showToast('Failed to update currency', 'error');
+        });
+    }
+
+    function saveTheme() {
+        var theme = document.getElementById('themeSelect').value;
+        document.documentElement.setAttribute('data-theme', theme);
+        localStorage.setItem('sf_theme', theme);
+        API.updateProfile({ dark_mode: theme === 'dark' }).catch(function () {});
+        Utils.showToast('Theme changed to ' + theme, 'success');
+    }
+
+    function saveDefaultAccount() {
+        var accountId = document.getElementById('defaultAccountSelect').value;
+        if (!accountId) return;
+
+        // Set this account as default via the accounts API
+        API.updateAccount(accountId, { is_default: true }).then(function () {
+            Utils.showToast('Default account updated', 'success');
+        }).catch(function () {
+            Utils.showToast('Failed to update default account', 'error');
+        });
+    }
+
+    /* ── Password ── */
+    function changePassword(e) {
+        e.preventDefault();
+        var current = document.getElementById('currentPassword').value;
+        var newPw = document.getElementById('newPassword').value;
+        var confirm = document.getElementById('confirmPassword').value;
+
+        if (!current || !newPw) {
+            Utils.showToast('Please fill in all password fields', 'error');
+            return;
+        }
+        if (newPw.length < 6) {
+            Utils.showToast('Password must be at least 6 characters', 'error');
+            return;
+        }
+        if (newPw !== confirm) {
+            Utils.showToast('Passwords do not match', 'error');
+            return;
+        }
+
+        API.changePassword({
+            current_password: current,
+            new_password: newPw
+        }).then(function () {
+            Utils.showToast('Password changed successfully', 'success');
+            document.getElementById('passwordForm').reset();
+        }).catch(function (err) {
+            Utils.showToast(err.error || err.message || 'Failed to change password', 'error');
+        });
+    }
+
+    /* ── Export Data ── */
+    function exportData() {
+        var exportType = document.getElementById('exportType').value;
+        var exportYear = parseInt(document.getElementById('exportYear').value);
+        var exportMonth = parseInt(document.getElementById('exportMonth').value);
+
+        Utils.showToast('Preparing PDF report...', 'info');
+
+        Promise.all([
+            API.getTransactions({ limit: 10000 }),
+            API.getBudgets(),
+            API.getSavingsGoals(),
+            API.getAccounts(),
+            API.getSubscriptions()
+        ]).then(function (results) {
+            var allTransactions = results[0].results || results[0];
+            var budgets      = results[1].results || results[1];
+            var goals        = results[2].results || results[2];
+            var accounts     = results[3].results || results[3];
+            var subs         = results[4].results || results[4];
+
+            // ── Filter transactions by selected period ──
+            var transactions = allTransactions.filter(function (t) {
+                var d = (t.date || t.created_at || '').slice(0, 10);
+                if (d.length < 7) return false;
+                var parts = d.split('-');
+                var tYear = parseInt(parts[0]);
+                var tMonth = parseInt(parts[1]);
+                if (exportType === 'yearly') return tYear === exportYear;
+                return tYear === exportYear && tMonth === exportMonth;
+            });
+
+            // ── Build period label ──
+            var monthNames = ['January','February','March','April','May','June','July','August','September','October','November','December'];
+            var periodLabel = exportType === 'yearly'
+                ? 'Year: ' + exportYear
+                : monthNames[exportMonth - 1] + ' ' + exportYear;
+
+            var jsPDF = window.jspdf.jsPDF;
+            var doc = new jsPDF({ orientation: 'portrait', unit: 'mm', format: 'a4' });
+
+            var pageW = doc.internal.pageSize.getWidth();
+            var pageH = doc.internal.pageSize.getHeight();
+            var primary = [5, 150, 105];      // #059669
+            var darkBg  = [15, 23, 42];        // #0f172a
+            var white   = [255, 255, 255];
+            var lightGray = [241, 245, 249];   // #f1f5f9
+            var textDark  = [30, 41, 59];      // #1e293b
+            var textMuted = [100, 116, 139];   // #64748b
+            var userName = (user.first_name + ' ' + user.last_name).trim() || user.username || 'User';
+            var today = new Date().toLocaleDateString('en-IN', { year: 'numeric', month: 'long', day: 'numeric' });
+
+            /* ── Header Banner ── */
+            doc.setFillColor.apply(doc, darkBg);
+            doc.rect(0, 0, pageW, 48, 'F');
+
+            doc.setFillColor.apply(doc, primary);
+            doc.rect(0, 44, pageW, 4, 'F');
+
+            doc.setTextColor.apply(doc, white);
+            doc.setFontSize(22);
+            doc.setFont('helvetica', 'bold');
+            doc.text('NextGen Smart Finance', 15, 16);
+
+            doc.setFontSize(10);
+            doc.setFont('helvetica', 'normal');
+            doc.text('Financial Report', 15, 24);
+
+            doc.setFontSize(9);
+            doc.setTextColor(180, 210, 200);
+            doc.text('Generated: ' + today, 15, 32);
+            doc.text('Period: ' + periodLabel, 15, 38);
+            doc.text('User: ' + userName + '  |  ' + (user.email || ''), pageW - 15, 32, { align: 'right' });
+
+            var cursorY = 58;
+
+            /* ── Helper: Section Title ── */
+            function sectionTitle(title, y) {
+                doc.setFillColor.apply(doc, primary);
+                doc.roundedRect(15, y, 3, 8, 1.5, 1.5, 'F');
+                doc.setTextColor.apply(doc, textDark);
+                doc.setFontSize(14);
+                doc.setFont('helvetica', 'bold');
+                doc.text(title, 22, y + 6.5);
+                return y + 14;
+            }
+
+            /* ── Helper: Summary Stat Boxes ── */
+            function summaryBoxes(items, y) {
+                var boxW = (pageW - 30 - (items.length - 1) * 5) / items.length;
+                items.forEach(function (item, i) {
+                    var x = 15 + i * (boxW + 5);
+                    doc.setFillColor.apply(doc, lightGray);
+                    doc.roundedRect(x, y, boxW, 18, 2, 2, 'F');
+                    doc.setTextColor.apply(doc, textMuted);
+                    doc.setFontSize(8);
+                    doc.setFont('helvetica', 'normal');
+                    doc.text(item.label, x + boxW / 2, y + 6, { align: 'center' });
+                    doc.setTextColor.apply(doc, primary);
+                    doc.setFontSize(12);
+                    doc.setFont('helvetica', 'bold');
+                    doc.text(item.value, x + boxW / 2, y + 14, { align: 'center' });
+                });
+                return y + 24;
+            }
+
+            /* ── Helper: format currency in PDF (ASCII-safe, no Unicode symbols) ── */
+            var currencyCode = (user.currency || 'INR').toUpperCase();
+            var currencyPrefix = { INR: 'Rs.', USD: '$', EUR: 'EUR ', GBP: 'GBP ' };
+            var cPrefix = currencyPrefix[currencyCode] || '';
+            function fmtAmt(val) {
+                var n = parseFloat(val) || 0;
+                var parts = Math.abs(n).toFixed(2).split('.');
+                var intPart = parts[0].replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+                return (n < 0 ? '-' : '') + cPrefix + intPart + '.' + parts[1];
+            }
+
+            var tableTheme = {
+                headStyles: {
+                    fillColor: primary,
+                    textColor: white,
+                    fontStyle: 'bold',
+                    fontSize: 9,
+                    cellPadding: { top: 3, bottom: 3, left: 4, right: 4 }
+                },
+                bodyStyles: {
+                    fontSize: 8.5,
+                    cellPadding: { top: 2.5, bottom: 2.5, left: 4, right: 4 },
+                    textColor: textDark
+                },
+                alternateRowStyles: {
+                    fillColor: [245, 250, 248]
+                },
+                styles: {
+                    lineColor: [226, 232, 240],
+                    lineWidth: 0.2,
+                    overflow: 'linebreak'
+                },
+                tableWidth: 'auto',
+                margin: { left: 15, right: 15 },
+                tableLineColor: [226, 232, 240],
+                tableLineWidth: 0.1
+            };
+
+            /* ── Accounts Overview ── */
+            if (accounts.length) {
+                cursorY = sectionTitle('Accounts Overview', cursorY);
+                var totalBalance = accounts.reduce(function (s, a) { return s + (parseFloat(a.balance) || 0); }, 0);
+                cursorY = summaryBoxes([
+                    { label: 'TOTAL ACCOUNTS', value: String(accounts.length) },
+                    { label: 'TOTAL BALANCE', value: fmtAmt(totalBalance) }
+                ], cursorY);
+
+                doc.autoTable(Object.assign({}, tableTheme, {
+                    startY: cursorY,
+                    head: [['Account Name', 'Type', 'Balance']],
+                    body: accounts.map(function (a) {
+                        return [a.name || a.account_name || '-', (a.account_type || a.type || '-').replace(/_/g, ' '), fmtAmt(a.balance)];
+                    }),
+                    columnStyles: {
+                        0: { cellWidth: 70 },
+                        1: { cellWidth: 50 },
+                        2: { halign: 'right', cellWidth: 60 }
+                    }
+                }));
+                cursorY = doc.lastAutoTable.finalY + 12;
+            }
+
+            /* ── Transactions ── */
+            if (transactions.length) {
+                if (cursorY > pageH - 60) { doc.addPage(); cursorY = 20; }
+                cursorY = sectionTitle('Transactions', cursorY);
+
+                var income = 0, expense = 0;
+                transactions.forEach(function (t) {
+                    var amt = parseFloat(t.amount) || 0;
+                    if (t.type === 'income') income += amt;
+                    else expense += amt;
+                });
+                cursorY = summaryBoxes([
+                    { label: 'TOTAL TRANSACTIONS', value: String(transactions.length) },
+                    { label: 'INCOME', value: fmtAmt(income) },
+                    { label: 'EXPENSES', value: fmtAmt(expense) },
+                    { label: 'NET', value: fmtAmt(income - expense) }
+                ], cursorY);
+
+                doc.autoTable(Object.assign({}, tableTheme, {
+                    startY: cursorY,
+                    head: [['Date', 'Description', 'Category', 'Type', 'Amount']],
+                    body: transactions.slice(0, 200).map(function (t) {
+                        var d = t.date || t.created_at || '';
+                        if (d.length > 10) d = d.slice(0, 10);
+                        return [
+                            d,
+                            (t.description || t.title || '-').substring(0, 40),
+                            t.category_name || t.category || '-',
+                            (t.type || '-'),
+                            fmtAmt(t.amount)
+                        ];
+                    }),
+                    columnStyles: {
+                        0: { cellWidth: 25 },
+                        1: { cellWidth: 55 },
+                        2: { cellWidth: 35 },
+                        3: { cellWidth: 25 },
+                        4: { halign: 'right', cellWidth: 40 }
+                    },
+                    didParseCell: function (data) {
+                        if (data.section === 'body' && data.column.index === 3) {
+                            data.cell.styles.textColor = data.cell.raw === 'income' ? [16, 185, 129] : [239, 68, 68];
+                            data.cell.styles.fontStyle = 'bold';
+                        }
+                    }
+                }));
+                cursorY = doc.lastAutoTable.finalY + 12;
+            }
+
+            /* ── Budgets ── */
+            if (budgets.length) {
+                if (cursorY > pageH - 60) { doc.addPage(); cursorY = 20; }
+                cursorY = sectionTitle('Budgets', cursorY);
+
+                var totalBudget = budgets.reduce(function (s, b) { return s + (parseFloat(b.amount) || 0); }, 0);
+                var totalSpent  = budgets.reduce(function (s, b) { return s + (parseFloat(b.spent) || 0); }, 0);
+                cursorY = summaryBoxes([
+                    { label: 'ACTIVE BUDGETS', value: String(budgets.length) },
+                    { label: 'TOTAL BUDGETED', value: fmtAmt(totalBudget) },
+                    { label: 'TOTAL SPENT', value: fmtAmt(totalSpent) },
+                    { label: 'REMAINING', value: fmtAmt(totalBudget - totalSpent) }
+                ], cursorY);
+
+                doc.autoTable(Object.assign({}, tableTheme, {
+                    startY: cursorY,
+                    head: [['Category', 'Budget', 'Spent', 'Remaining', 'Usage']],
+                    body: budgets.map(function (b) {
+                        var amt = parseFloat(b.amount) || 0;
+                        var sp  = parseFloat(b.spent) || 0;
+                        var pct = amt > 0 ? Math.round(sp / amt * 100) : 0;
+                        return [b.category_name || b.category || '-', fmtAmt(amt), fmtAmt(sp), fmtAmt(amt - sp), pct + '%'];
+                    }),
+                    columnStyles: {
+                        0: { cellWidth: 40 },
+                        1: { halign: 'right', cellWidth: 35 },
+                        2: { halign: 'right', cellWidth: 35 },
+                        3: { halign: 'right', cellWidth: 40 },
+                        4: { halign: 'center', cellWidth: 22 }
+                    },
+                    didParseCell: function (data) {
+                        if (data.section === 'body' && data.column.index === 4) {
+                            var pct = parseInt(data.cell.raw);
+                            data.cell.styles.textColor = pct > 90 ? [239, 68, 68] : pct > 70 ? [245, 158, 11] : [16, 185, 129];
+                            data.cell.styles.fontStyle = 'bold';
+                        }
+                    }
+                }));
+                cursorY = doc.lastAutoTable.finalY + 12;
+            }
+
+            /* ── Savings Goals ── */
+            if (goals.length) {
+                if (cursorY > pageH - 60) { doc.addPage(); cursorY = 20; }
+                cursorY = sectionTitle('Savings Goals', cursorY);
+
+                doc.autoTable(Object.assign({}, tableTheme, {
+                    startY: cursorY,
+                    head: [['Goal', 'Target', 'Saved', 'Progress', 'Deadline']],
+                    body: goals.map(function (g) {
+                        var tgt = parseFloat(g.target_amount) || 0;
+                        var cur = parseFloat(g.current_amount) || 0;
+                        var pct = tgt > 0 ? Math.round(cur / tgt * 100) : 0;
+                        return [g.name || g.title || '-', fmtAmt(tgt), fmtAmt(cur), pct + '%', g.deadline || g.target_date || '-'];
+                    }),
+                    columnStyles: {
+                        0: { cellWidth: 45 },
+                        1: { halign: 'right', cellWidth: 35 },
+                        2: { halign: 'right', cellWidth: 35 },
+                        3: { halign: 'center', cellWidth: 25 },
+                        4: { cellWidth: 30 }
+                    },
+                    didParseCell: function (data) {
+                        if (data.section === 'body' && data.column.index === 3) {
+                            var pct = parseInt(data.cell.raw);
+                            data.cell.styles.textColor = pct >= 100 ? [16, 185, 129] : pct >= 50 ? [245, 158, 11] : [100, 116, 139];
+                            data.cell.styles.fontStyle = 'bold';
+                        }
+                    }
+                }));
+                cursorY = doc.lastAutoTable.finalY + 12;
+            }
+
+            /* ── Subscriptions ── */
+            if (subs.length) {
+                if (cursorY > pageH - 60) { doc.addPage(); cursorY = 20; }
+                cursorY = sectionTitle('Subscriptions', cursorY);
+
+                var monthlyTotal = subs.reduce(function (s, sub) {
+                    var amt = parseFloat(sub.amount) || 0;
+                    if (sub.frequency === 'yearly' || sub.frequency === 'annual') return s + amt / 12;
+                    if (sub.frequency === 'weekly') return s + amt * 4.33;
+                    return s + amt;
+                }, 0);
+                cursorY = summaryBoxes([
+                    { label: 'ACTIVE SUBSCRIPTIONS', value: String(subs.length) },
+                    { label: 'EST. MONTHLY COST', value: fmtAmt(monthlyTotal) }
+                ], cursorY);
+
+                doc.autoTable(Object.assign({}, tableTheme, {
+                    startY: cursorY,
+                    head: [['Name', 'Amount', 'Frequency', 'Next Billing', 'Status']],
+                    body: subs.map(function (sub) {
+                        return [
+                            sub.name || '-',
+                            fmtAmt(sub.amount),
+                            sub.frequency || '-',
+                            sub.next_billing_date || sub.next_payment || '-',
+                            sub.status || sub.is_active ? 'Active' : 'Inactive'
+                        ];
+                    }),
+                    columnStyles: {
+                        0: { cellWidth: 45 },
+                        1: { halign: 'right', cellWidth: 35 },
+                        2: { cellWidth: 30 },
+                        3: { cellWidth: 35 },
+                        4: { cellWidth: 25 }
+                    },
+                    didParseCell: function (data) {
+                        if (data.section === 'body' && data.column.index === 4) {
+                            data.cell.styles.textColor = data.cell.raw === 'Active' || data.cell.raw === 'active' ? [16, 185, 129] : [239, 68, 68];
+                        }
+                    }
+                }));
+                cursorY = doc.lastAutoTable.finalY + 12;
+            }
+
+            /* ── Footer on every page ── */
+            var totalPages = doc.internal.getNumberOfPages();
+            for (var p = 1; p <= totalPages; p++) {
+                doc.setPage(p);
+                doc.setFillColor(241, 245, 249);
+                doc.rect(0, pageH - 12, pageW, 12, 'F');
+                doc.setFontSize(7);
+                doc.setTextColor.apply(doc, textMuted);
+                doc.setFont('helvetica', 'normal');
+                doc.text('NextGen Smart Finance Manager  |  Confidential', 15, pageH - 5);
+                doc.text('Page ' + p + ' of ' + totalPages, pageW - 15, pageH - 5, { align: 'right' });
+            }
+
+            var fileSuffix = exportType === 'yearly'
+                ? exportYear
+                : exportYear + '-' + (exportMonth < 10 ? '0' : '') + exportMonth;
+            doc.save('nextgen-finance-report-' + fileSuffix + '.pdf');
+            Utils.showToast('PDF report exported successfully', 'success');
+        }).catch(function (err) {
+            console.error('Export error:', err);
+            Utils.showToast('Failed to export data', 'error');
+        });
+    }
+
+    /* ── Delete Account ── */
+    function closeDeleteModal() {
+        document.getElementById('deleteConfirmModal').classList.remove('active');
+    }
+
+    function deleteAccount() {
+        if (document.getElementById('deleteConfirmInput').value !== 'DELETE') return;
+
+        // Clear all local data and redirect to login
+        API.clearAuth();
+        localStorage.removeItem('sf_theme');
+        localStorage.removeItem('sf_sidebar_scroll');
+        Utils.showToast('Account deletion requested', 'info');
+        setTimeout(function () {
+            window.location.href = 'login.html';
+        }, 1000);
+    }
+})();

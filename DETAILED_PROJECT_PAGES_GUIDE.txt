@@ -1,0 +1,900 @@
+NEXTGEN SMART FINANCE MANAGER
+COMPLETE PAGE-BY-PAGE EXPLANATION
+
+Generated on: 2026-04-08
+Scope: All frontend HTML pages in the project (19 pages)
+
+PAGES COVERED
+1. index.html
+2. login.html
+3. signup.html
+4. admin-login.html
+5. onboarding.html
+6. dashboard.html
+7. transactions.html
+8. budgets.html
+9. goals.html
+10. subscriptions.html
+11. accounts.html
+12. reports.html
+13. insights.html
+14. health-score.html
+15. simulator.html
+16. import.html
+17. tax-center.html
+18. profile.html
+19. admin.html
+
+==================================================
+GLOBAL APP STRUCTURE (SHARED BEHAVIOR)
+==================================================
+
+Most authenticated pages load these shared scripts:
+- js/api.js: API client, token handling, auto refresh of access token.
+- js/utils.js: helpers for currency/date formatting, toasts, charts, icons, modals.
+- js/app.js: sidebar behavior, user info in shell, theme toggle, logout, chatbot widget, notification bubbles.
+
+Authentication model:
+- JWT tokens are stored in local storage.
+- Access token key: sf_token
+- Refresh token key: sf_refresh_token
+- Cached user key: sf_user
+- When a request gets 401, api.js attempts POST /api/auth/refresh/ and retries once.
+- If refresh fails, user is redirected to login.html.
+
+Theme and shell model:
+- Pages with sidebar have menu toggle, user header, theme toggle, logout button.
+- Theme is switched on root document attribute and reflected in charts/maps.
+
+==================================================
+1) index.html (Landing Page)
+==================================================
+
+Purpose:
+- Public marketing page that introduces product value, features, pricing, and conversion CTA.
+
+Audience and access:
+- Public (no login required).
+
+Scripts and dependencies:
+- js/utils.js
+- js/landing.js
+- No backend API calls from this page.
+
+Main visible sections:
+- Hero section with messaging and finance-themed visual cards.
+- Feature blocks and capability highlights.
+- Pricing section and conversion CTAs.
+- Steps/how-it-works section.
+
+Key IDs used on page:
+- mainNav, navHamburger, features, pricing, how-it-works, cta, money-visuals
+
+Primary user flows:
+- Read product narrative and feature cards.
+- Jump to pricing via hash links.
+- Click signup/login CTA and navigate to auth pages.
+
+Notable behavior:
+- landing.js manages premium CTA destinations and responsive menu behavior.
+
+==================================================
+2) login.html (User Login)
+==================================================
+
+Purpose:
+- Entry point for existing users.
+
+Audience and access:
+- Public.
+
+Scripts and dependencies:
+- Google Identity script (accounts.google.com/gsi/client)
+- js/api.js
+- js/utils.js
+- js/auth.js
+
+Main UI components:
+- Email and password form.
+- Continue with Google button.
+- Error message container.
+- Login button with spinner state.
+
+Key IDs:
+- loginForm, email, password, loginBtn, loginSpinner, authError, googleLoginBtn
+
+Detailed workflow:
+1. User enters email/password and submits login form.
+2. auth.js calls API.login(email, password) -> POST /api/auth/login/.
+3. On success, token and user are cached.
+4. auth.js calls API.getProfile() -> GET /api/auth/profile/ to route correctly.
+5. Redirect target is based on role and onboarding state.
+6. Google flow uses API.googleLogin(token) -> POST /api/auth/google-login/.
+
+Error and edge handling:
+- Client-side empty-field checks.
+- Server/API errors displayed in authError.
+- If backend cannot be reached, user gets a clear connectivity hint.
+
+==================================================
+3) signup.html (Signup with OTP Verification)
+==================================================
+
+Purpose:
+- Registration page for new users.
+
+Audience and access:
+- Public.
+
+Scripts and dependencies:
+- Google Identity script
+- js/api.js
+- js/utils.js
+- js/auth.js
+
+Main UI components:
+- Identity fields: first name, last name, username, email.
+- Password and confirm password fields.
+- OTP input group that appears after OTP request.
+- Verify button for OTP-based completion.
+
+Key IDs:
+- signupForm, firstName, lastName, username, email, password, passwordConfirm,
+  signupOtpGroup, signupOtpCode, signupOtpHint, signupBtn, verifySignupOtpBtn,
+  signupSpinner, authError, googleLoginBtn
+
+Detailed workflow:
+1. User fills registration fields.
+2. Form validation runs (required fields, password confirmation, quality checks).
+3. API.requestSignupOtp(email) -> POST /api/auth/signup/request-otp/.
+4. OTP group is shown and hint text updated.
+5. User enters OTP and submits verification.
+6. API.verifySignupOtp(payload) -> POST /api/auth/signup/verify-otp/.
+7. On success, auth state is set and user proceeds into onboarding flow.
+8. Google option uses API.googleLogin(token).
+
+Error and edge handling:
+- Inline and toast-level error feedback.
+- OTP required before completion.
+- Prevents accidental submit when required fields are missing.
+
+==================================================
+4) admin-login.html (Admin Authentication)
+==================================================
+
+Purpose:
+- Dedicated login page for platform administrators.
+
+Audience and access:
+- Public page, but successful auth requires admin credentials.
+
+Scripts and dependencies:
+- js/api.js
+- js/utils.js
+- js/admin-login.js
+
+Main UI components:
+- Admin email/password fields.
+- Admin login button with spinner.
+- Error surface for auth failures.
+
+Key IDs:
+- adminLoginForm, adminEmail, adminPassword, adminLoginBtn,
+  adminLoginSpinner, adminAuthError
+
+Detailed workflow:
+1. admin-login.js checks existing auth state.
+2. If already logged in and profile shows admin role, it routes to admin panel.
+3. On submit, API.loginAdmin(email, password) -> POST /api/auth/admin/login/.
+4. Script validates role via API.getProfile().
+5. Non-admin users are blocked from entering admin.html.
+
+Error and edge handling:
+- Hides/shows dedicated error panel.
+- Handles mismatch between login token and role expectation.
+
+==================================================
+5) onboarding.html (First-Time Setup)
+==================================================
+
+Purpose:
+- Multi-step onboarding wizard after first successful signup/login.
+
+Audience and access:
+- Authenticated users, especially first-time users.
+
+Scripts and dependencies:
+- js/api.js
+- js/utils.js
+- js/onboarding.js
+
+Main UI components:
+- Multi-slide content with progress dots.
+- Prev/next/skip controls.
+- Optional password setup step.
+- Personalization controls: currency, income, goal choices.
+
+Key IDs:
+- obDots, obSkip, obBack, obNext, obError,
+  newPassword, confirmPassword, onboardCurrency, onboardIncome, goalOptions
+
+Detailed workflow:
+1. Wizard loads and builds step indicators.
+2. User advances through product tour slides.
+3. Optional password step (set account password if needed):
+   API.setPassword(newPassword) -> POST /api/auth/set-password/.
+4. Personalization values are saved using profile update:
+   API.updateProfile(...) -> PATCH /api/auth/profile/.
+5. User object is refreshed and cached.
+6. Completion routes user into dashboard.
+
+Error and edge handling:
+- Password strength and match checks.
+- Form-level validation with user-friendly error panel.
+
+==================================================
+6) dashboard.html (Main Financial Overview)
+==================================================
+
+Purpose:
+- Central summary page for balances, trends, alerts, and quick navigation.
+
+Audience and access:
+- Authenticated user shell page.
+
+Scripts and dependencies:
+- Chart.js
+- Shepherd.js (guided tour)
+- Leaflet.js
+- js/api.js, js/utils.js, js/app.js, js/dashboard.js, js/tour.js
+
+Main UI components:
+- Top summary cards: Total Balance, Income, Expenses, Budget Alerts.
+- Charts: Income vs Expenses and Spending by Category.
+- Location insights panel with map and hotspot list.
+- Recent transactions panel.
+- Savings goals preview.
+- AI insights preview.
+
+Key IDs:
+- overviewStats, totalBalance, totalIncome, totalExpenses, alertCount,
+  incomeExpenseChart, categoryChart, dashboardLocationMap,
+  dashboardLocationList, dashboardLocationTotal, dashboardLocationCount,
+  recentTransactions, dashboardGoals, dashboardInsights, startTourBtn
+
+Detailed workflow:
+1. dashboard.js loads summary via API.getDashboard() -> GET /api/finance/dashboard/.
+2. Renders cards, charts, recent transactions, goals, and budget alerts.
+3. Loads AI preview via API.getInsights() -> GET /api/insights/.
+4. Loads spending hotspots via API.getSpendingMap() -> GET /api/finance/transactions/spending-map/.
+5. Initializes map layers and adapts tile style to theme.
+6. Tour can be started from startTourBtn.
+
+Error and edge handling:
+- Loading placeholders and defensive empty-state rendering.
+- Theme-aware chart/map redraw logic.
+- Toasts for API failure states.
+
+==================================================
+7) transactions.html (Transaction Ledger and Spend Geography)
+==================================================
+
+Purpose:
+- Full transaction CRUD, filtering, statistics, and geographic spend analysis.
+
+Audience and access:
+- Authenticated user shell page.
+
+Scripts and dependencies:
+- Leaflet.js and Leaflet.heat
+- js/api.js, js/utils.js, js/app.js, js/transactions.js
+
+Main UI components:
+- Period tabs: This Month, This Year, All Time.
+- Search and filter controls: type, category, date from/to.
+- Stat cards: income, expenses, savings, count.
+- Category breakdown panel.
+- Map card with tabs: Hybrid, Heat, Hotspots.
+- Hotspots list and map metrics.
+- Transactions table with pagination.
+- Add/Edit modal and delete confirmation modal.
+
+Key IDs:
+- periodTabs, searchInput, filterType, filterCategory, filterDateFrom, filterDateTo,
+  txIncomeCount, txExpenseCount, txAvgDaily, txCategoryBreakdown,
+  txMapCard, txHotspotsList, transactionsBody, pagination,
+  transactionModal, transactionForm, txId, txAmount, txCategory, txAccount, txDate, txLocation,
+  deleteModal, confirmDeleteBtn
+
+Detailed workflow:
+1. Initial load fetches categories/accounts and current period transactions.
+2. API.getTransactions(params) -> GET /api/finance/transactions/.
+3. Stats/secondary aggregates are assembled with:
+   API.getDashboard() and API.getReports().
+4. Map hotspot data comes from API.getSpendingMap(params).
+5. Add transaction:
+   API.createTransaction(payload) -> POST /api/finance/transactions/.
+6. Edit transaction:
+   API.updateTransaction(id, payload) -> PUT /api/finance/transactions/{id}/.
+7. Delete transaction:
+   API.deleteTransaction(id) -> DELETE /api/finance/transactions/{id}/.
+
+Error and edge handling:
+- Confirm delete modal prevents accidental deletion.
+- Filter changes trigger safe reloads.
+- Map and list fall back gracefully when no geo points exist.
+
+==================================================
+8) budgets.html (Budget Planning and Control)
+==================================================
+
+Purpose:
+- Create, update, and review budgets by month/year/category.
+
+Audience and access:
+- Authenticated user shell page.
+
+Scripts and dependencies:
+- js/api.js, js/utils.js, js/app.js, js/budgets.js
+
+Main UI components:
+- Month/year filters.
+- Budget cards/grid.
+- Add/Edit budget modal.
+
+Key IDs:
+- filterMonth, filterYear, budgetsGrid,
+  budgetModal, budgetForm, budgetId, budgetCategory, budgetAmount, budgetMonth, budgetYear
+
+Detailed workflow:
+1. Load categories and budgets for selected period.
+2. API.getBudgets(params) -> GET /api/finance/budgets/.
+3. API.getCategories() -> GET /api/finance/categories/.
+4. Create budget:
+   API.createBudget(payload) -> POST /api/finance/budgets/.
+5. Edit budget:
+   API.updateBudget(id, payload) -> PUT /api/finance/budgets/{id}/.
+6. Delete budget:
+   API.deleteBudget(id) -> DELETE /api/finance/budgets/{id}/.
+
+Error and edge handling:
+- Amount and required-field validation.
+- Empty period rendering handled cleanly.
+- Toast feedback for CRUD operations.
+
+==================================================
+9) goals.html (Savings Goal Management)
+==================================================
+
+Purpose:
+- Track savings goals and log goal contributions.
+
+Audience and access:
+- Authenticated user shell page.
+
+Scripts and dependencies:
+- js/api.js, js/utils.js, js/app.js, js/goals.js
+
+Main UI components:
+- Goals grid with progress indicators.
+- Add/Edit goal modal.
+- Add Funds modal with account source and notes.
+- Contribution history panel per goal.
+
+Key IDs:
+- goalsGrid,
+  goalModal, goalForm, goalId, goalName, goalTarget, goalCurrent, goalDeadline,
+  fundsModal, fundsForm, fundsGoalId, fundsGoalName, fundsCurrentAmount,
+  fundsAmount, fundsAccount, fundsNotes, fundsHistory
+
+Detailed workflow:
+1. Load goals list with API.getSavingsGoals() -> GET /api/finance/savings-goals/.
+2. Create goal:
+   API.createSavingsGoal(payload) -> POST /api/finance/savings-goals/.
+3. Update goal:
+   API.updateSavingsGoal(id, payload) -> PUT /api/finance/savings-goals/{id}/.
+4. Delete goal:
+   API.deleteSavingsGoal(id) -> DELETE /api/finance/savings-goals/{id}/.
+5. Add funds:
+   API.addFundsToGoal(id, payload) -> POST /api/finance/savings-goals/{id}/add-funds/.
+6. Load contribution history:
+   API.getGoalContributions(id) -> GET /api/finance/savings-goals/{id}/contributions/.
+7. Account list is loaded via API.getAccounts() for contribution source selection.
+
+Error and edge handling:
+- Positive amount checks.
+- Date parsing utility for deadlines.
+- Modal reset/close protection to avoid stale data.
+
+==================================================
+10) subscriptions.html (Recurring Payment Center)
+==================================================
+
+Purpose:
+- Manual and assisted management of recurring subscriptions.
+
+Audience and access:
+- Authenticated user shell page.
+
+Scripts and dependencies:
+- js/api.js, js/utils.js, js/app.js, js/subscriptions.js
+
+Main UI components:
+- Summary cards: monthly cost, yearly cost, active count.
+- Detect subscriptions action.
+- Detected candidates panel.
+- Subscription list panel.
+- Add/Edit modal.
+
+Key IDs:
+- detectSubsBtn, detectedCard, detectedList,
+  subSummary, subMonthly, subYearly, subCount,
+  subsList,
+  subModal, subForm, subEditId, subName, subAmount, subFrequency, subNextDate
+
+Detailed workflow:
+1. Load current subscriptions:
+   API.getSubscriptions() -> GET /api/finance/subscriptions/.
+2. Render totals and urgency labels.
+3. Auto-detect recurring patterns:
+   API.detectSubscriptions() -> GET /api/insights/subscriptions/detect/.
+4. Save detected or manual entry:
+   API.createSubscription(payload) -> POST /api/finance/subscriptions/.
+5. Edit:
+   API.updateSubscription(id, payload) -> PUT /api/finance/subscriptions/{id}/.
+6. Remove:
+   API.deleteSubscription(id) -> DELETE /api/finance/subscriptions/{id}/.
+
+Premium behavior:
+- Auto-detection is premium-gated; warning toast prompts upgrade when required.
+
+Error and edge handling:
+- Date parsing helper and urgency coloring.
+- Safe modal reset and validation before submit.
+
+==================================================
+11) accounts.html (Account Portfolio)
+==================================================
+
+Purpose:
+- Manage all user financial accounts and default account selection.
+
+Audience and access:
+- Authenticated user shell page.
+
+Scripts and dependencies:
+- js/api.js, js/utils.js, js/app.js, js/accounts.js
+
+Main UI components:
+- Summary cards: total balance, total accounts, default account.
+- Accounts grid.
+- Add/Edit account modal.
+
+Key IDs:
+- accountSummary, totalBalance, totalAccounts, defaultAccount,
+  accountsGrid,
+  accountModal, accountForm, accountId, accountName, accountType,
+  accountBalance, accountColor, accountDefault
+
+Detailed workflow:
+1. Load accounts:
+   API.getAccounts() -> GET /api/finance/accounts/.
+2. Compute and render summary totals.
+3. Create account:
+   API.createAccount(payload) -> POST /api/finance/accounts/.
+4. Update account:
+   API.updateAccount(id, payload) -> PUT /api/finance/accounts/{id}/.
+5. Delete account:
+   API.deleteAccount(id) -> DELETE /api/finance/accounts/{id}/.
+
+Error and edge handling:
+- Numeric and required-field validation.
+- Modal open/close helpers prevent stale form state.
+
+==================================================
+12) reports.html (Analytical Reporting)
+==================================================
+
+Purpose:
+- Visualize income/expense/savings trends and tax snapshot.
+
+Audience and access:
+- Authenticated user shell page.
+
+Scripts and dependencies:
+- Chart.js
+- js/api.js, js/utils.js, js/app.js, js/reports.js
+
+Main UI components:
+- Year selector.
+- Top summary metrics.
+- Tax snapshot card.
+- Four charts: trend, savings, expense breakdown, income sources.
+
+Key IDs:
+- reportYear, reportSummary,
+  reportIncome, reportExpenses, reportSavings,
+  taxReportCard, reportTaxAnnual, reportTaxMonthly, reportTaxEligible,
+  reportTaxDifference, reportTaxRegime, reportTaxHint,
+  monthlyTrendChart, savingsChart, expenseBreakdownChart, incomeSourcesChart
+
+Detailed workflow:
+1. Load selected year data:
+   API.getReports(params) -> GET /api/finance/reports/.
+2. Tax snapshot enrichment via:
+   API.getTaxSummary(params) -> GET /api/tax/summary/.
+   API.getTaxRegimeComparison(params) -> GET /api/tax/regime-comparison/.
+   API.getTaxEstimator(params) -> GET /api/tax/estimator/.
+3. Draw and update charts with semantic colors.
+4. Re-render when year selector changes.
+
+Error and edge handling:
+- Handles missing tax payload without breaking main charts.
+- Theme-aware chart scales and palette.
+
+==================================================
+13) insights.html (AI Insights Workspace)
+==================================================
+
+Purpose:
+- Show AI insights, behavioral patterns, and budget alerts in tabbed views.
+
+Audience and access:
+- Authenticated user shell page.
+
+Scripts and dependencies:
+- js/api.js, js/utils.js, js/app.js, js/insights.js
+
+Main UI components:
+- Three tabs: AI Suggestions, Behavioral Patterns, Budget Alerts.
+- Insight counters (total/high/opportunities).
+- Lists for each insights category.
+- Refresh action.
+
+Key IDs:
+- refreshInsightsBtn,
+  insightsSummary, insightsTotalCount, insightsHighCount, insightsOpportunityCount,
+  insightsPanelSuggestions, insightsPanelBehavioral, insightsPanelAlerts,
+  insightsList, behavioralList, alertsList
+
+Detailed workflow:
+1. Load core insights:
+   API.getInsights() -> GET /api/insights/.
+2. Load behavioral panel:
+   API.getBehavioralInsights() -> GET /api/insights/behavioral/.
+3. Load alerts panel:
+   API.getBudgetAlerts() -> GET /api/insights/alerts/.
+4. User profile from API.getUser() is used to decide premium access pathways.
+
+Premium behavior:
+- Page has premium lock handling and limited-mode rendering.
+- Shows upgrade cards/buttons when a section is gated.
+
+Error and edge handling:
+- Graceful locked-state HTML for premium_required errors.
+- Tab-specific loading/error isolation.
+
+==================================================
+14) health-score.html (Financial Health Scoring)
+==================================================
+
+Purpose:
+- Display financial health score, breakdown, and suggestions.
+
+Audience and access:
+- Authenticated user shell page.
+
+Scripts and dependencies:
+- Chart.js
+- js/api.js, js/utils.js, js/app.js, js/health-score.js
+
+Main UI components:
+- Score hero container.
+- Breakdown section.
+- Suggestions list.
+- Refresh score button.
+
+Key IDs:
+- scoreHero, scoreBreakdown, suggestionsList, scoreSuggestions, refreshScoreBtn
+
+Detailed workflow:
+1. Load score payload via API.getHealthScore() -> GET /api/insights/health-score/.
+2. Render score letter/label/colors.
+3. Render component-level breakdown and suggestions.
+4. Refresh action re-fetches and redraws.
+
+Premium behavior:
+- Premium lock handling is implemented.
+- If gated, hero shows upgrade prompt and premium message.
+
+Error and edge handling:
+- premium_required errors handled with dedicated locked UI.
+- Non-premium or fetch failures do not crash shell layout.
+
+==================================================
+15) simulator.html (What-If Projection Engine)
+==================================================
+
+Purpose:
+- Let user simulate future savings under category adjustments.
+
+Audience and access:
+- Authenticated user shell page.
+
+Scripts and dependencies:
+- Chart.js
+- js/api.js, js/utils.js, js/app.js, js/simulator.js
+
+Main UI components:
+- Dynamic slider area for spend adjustments.
+- Time horizon selector.
+- Run Simulation button.
+- Results card and projection chart.
+
+Key IDs:
+- simSliders, simMonths, runSimBtn, simPlaceholder, simResults, simSummary, simChart
+
+Detailed workflow:
+1. Fetch baseline categories and current metrics:
+   API.getSimulatorBaseline() -> GET /api/insights/simulator/baseline/.
+2. Render sliders.
+3. On submit, send adjustments:
+   API.runSimulation(adjustments, months) -> POST /api/insights/simulator/simulate/.
+4. Render returned projection summary and chart.
+
+Premium behavior:
+- Premium lock renderer exists.
+- Gated users are shown upgrade prompt and warning toast.
+
+Error and edge handling:
+- Protects against API failure by maintaining placeholder state.
+- Re-runs overwrite chart safely.
+
+==================================================
+16) import.html (CSV and Receipt Import)
+==================================================
+
+Purpose:
+- Import transaction data from CSV and extract transactions from receipt text/images.
+
+Audience and access:
+- Authenticated user shell page.
+
+Scripts and dependencies:
+- js/api.js, js/utils.js, js/app.js, js/import.js
+
+Main UI components:
+- Drag/drop upload zone and file picker.
+- Preview card with parsed rows and import button.
+- Import result card with statuses.
+- Receipt scanner card with text input and optional image upload/preview.
+
+Key IDs:
+- dropzone, csvFileInput,
+  previewCard, previewCount, previewTable, previewHead, previewBody, importBtn,
+  resultCard, importResults,
+  receiptText, receiptImageInput, receiptImagePreview, receiptImageMeta,
+  clearReceiptImageBtn, scanReceiptBtn, receiptResult
+
+Detailed workflow:
+1. User uploads CSV.
+2. API.previewCSV(formData) -> POST /api/insights/csv/preview/.
+3. Preview table is rendered.
+4. User clicks Import All.
+5. API.importCSV(formData) -> POST /api/insights/csv/import/.
+6. Import summary and per-row outcome are shown.
+7. Receipt path:
+   API.scanReceipt(formData) -> POST /api/insights/scan-receipt/.
+8. Extracted data can be converted to transaction creation via:
+   API.createTransaction(payload) -> POST /api/finance/transactions/.
+
+Premium behavior:
+- CSV import and receipt scanner include premium_required handling.
+- Upgrade messaging points to pricing/profile upgrade route.
+
+Error and edge handling:
+- File type checks for CSV/image flows.
+- Image preview state management and clear action.
+- Safe empty/error rendering for preview/results.
+
+==================================================
+17) tax-center.html (Tax Intelligence)
+==================================================
+
+Purpose:
+- Show tax summary and premium tax optimization tools.
+
+Audience and access:
+- Authenticated user shell page.
+
+Scripts and dependencies:
+- Chart.js
+- js/api.js, js/utils.js, js/app.js, js/tax-center.js
+
+Main UI components:
+- Year selector.
+- Summary metric grid (income, deductions, annual/monthly tax).
+- Regime comparison block (old/new taxable and totals).
+- Difference text and regime badge.
+- Regime chart.
+- Deduction tracker list.
+- Suggestions list.
+
+Key IDs:
+- taxYearSelect, taxSummaryGrid,
+  taxAnnualIncome, taxEligibleDeductions, taxEstimatedAnnual, taxEstimatedMonthly,
+  taxOldTaxable, taxOldTotal, taxNewTaxable, taxNewTotal,
+  taxDifferenceText, taxRegimeBadge, taxRegimeChart,
+  taxDeductionTracker, taxSuggestionsList
+
+Detailed workflow:
+1. Get base summary:
+   API.getTaxSummary(params) -> GET /api/tax/summary/.
+2. If premium, also fetch:
+   API.getTaxRegimeComparison(params) -> GET /api/tax/regime-comparison/.
+   API.getTaxEstimator(params) -> GET /api/tax/estimator/.
+   API.getTaxSuggestions(params) -> GET /api/tax/suggestions/.
+3. Render summary metrics and charts.
+4. Year selector triggers reload.
+
+Premium behavior:
+- Uses profile plan checks plus premium_required error checks.
+- Non-premium users still see base summary, but advanced sections are locked.
+- Locked sections explicitly show Premium labels and upgrade CTA.
+
+Error and edge handling:
+- Promise-settled handling isolates failures per section.
+- Distinguishes premium lock from normal API error.
+
+==================================================
+18) profile.html (Profile, Security, Premium, Export)
+==================================================
+
+Purpose:
+- Manage personal details, preferences, password, premium plan, and PDF export.
+
+Audience and access:
+- Authenticated user shell page.
+
+Scripts and dependencies:
+- Chart.js
+- jsPDF and jsPDF autoTable
+- Razorpay Checkout SDK
+- js/api.js, js/utils.js, js/app.js, js/profile-export.js, js/profile.js
+
+Main UI components:
+- Profile hero with avatar/name/plan status.
+- Personal details form with edit/save/cancel.
+- Preferences (currency, theme, default account).
+- Premium card with monthly/yearly upgrade buttons.
+- Password change form.
+- Export controls (monthly/yearly, month/year selectors, export button).
+- Delete-account confirmation flow.
+- Hidden export canvas for PDF charts.
+
+Key IDs:
+- profileAvatar, profileName, profileEmail, profileJoined,
+  personalForm, firstName, lastName, emailField, avatarUrl,
+  currencySelect, themeSelect, defaultAccountSelect,
+  planBadge, planStatusLabel, planStatusDesc, premiumExpiryText,
+  upgradeMonthlyBtn, upgradeYearlyBtn,
+  passwordForm, currentPassword, newPassword, confirmPassword,
+  exportType, exportYear, exportMonth, exportDataBtn, pdfChartCanvas,
+  deleteConfirmModal, deleteConfirmInput, confirmDeleteBtn
+
+Detailed workflow:
+1. Load profile and entitlements:
+   API.getProfile() -> GET /api/auth/profile/.
+   API.getEntitlements() -> GET /api/auth/entitlements/.
+2. Load account options for default-account preference:
+   API.getAccounts() -> GET /api/finance/accounts/.
+3. Save personal details:
+   API.updateProfile(payload) -> PATCH /api/auth/profile/.
+4. Save default account preference:
+   API.updateAccount(id, payload) -> PUT /api/finance/accounts/{id}/.
+5. Change password:
+   API.changePassword(payload) -> POST /api/auth/change-password/.
+6. Premium checkout flow:
+   API.createPremiumOrder(plan) -> POST /api/auth/premium/create-order/.
+   Razorpay checkout opens.
+   API.verifyPremiumPayment(payload) -> POST /api/auth/premium/verify/.
+7. Export PDF flow:
+   profile-export.js builds multi-section PDF and saves file locally.
+   It calls APIs for transactions, budgets, goals, accounts, subscriptions,
+   reports, insights, health score, behavioral insights, simulator baseline,
+   budget alerts, and tax endpoints.
+
+PDF export scope details:
+- Includes major financial sections, chart images, tables, and appendix.
+- Footer with page numbering and report metadata.
+- Header rendering has been implemented for all pages.
+- User summary section title uses username context.
+
+Error and edge handling:
+- Strong UI state handling for edit mode vs view mode.
+- Checkout busy-state protection.
+- Clear toasts for profile/password/payment/export errors.
+
+==================================================
+19) admin.html (Operations and Governance)
+==================================================
+
+Purpose:
+- Operational control center for platform administrators.
+
+Audience and access:
+- Admin users only.
+
+Scripts and dependencies:
+- js/api.js, js/utils.js, js/app.js, js/admin.js
+
+Main UI components:
+- KPI cards: users, premium users, monthly transactions, estimated MRR.
+- User access table with role/plan filters and search.
+- Audit log feed with refresh controls.
+
+Key IDs:
+- adminTotalUsers, adminPremiumUsers, adminTransactionsMonth, adminEstimatedMrr,
+  adminUserSearch, adminRoleFilter, adminPlanFilter,
+  adminUsersTableBody, adminUsersMeta, adminUsersRefreshBtn,
+  adminAuditList, adminAuditRefreshBtn
+
+Detailed workflow:
+1. Load overview metrics:
+   API.getAdminOverview() -> GET /api/auth/admin/overview/.
+2. Load users list with search/filters:
+   API.getAdminUsers(params) -> GET /api/auth/admin/users/.
+3. Update selected user role/plan flags:
+   API.updateAdminUser(userId, payload) -> PATCH /api/auth/admin/users/{id}/.
+4. Load audit trail:
+   API.getAdminAuditLogs(params) -> GET /api/auth/admin/audit-logs/.
+
+Error and edge handling:
+- Separate loading/reload paths for users vs logs.
+- Defensive rendering when lists are empty.
+- Toast feedback for update failures.
+
+==================================================
+PAGE-BY-PAGE THIRD-PARTY LIBRARY MAP
+==================================================
+
+- index.html: none
+- login.html: Google Identity Services
+- signup.html: Google Identity Services
+- admin-login.html: none
+- onboarding.html: none
+- dashboard.html: Chart.js, Shepherd.js, Leaflet
+- transactions.html: Leaflet, Leaflet.heat
+- budgets.html: none
+- goals.html: none
+- subscriptions.html: none
+- accounts.html: none
+- reports.html: Chart.js
+- insights.html: none
+- health-score.html: Chart.js
+- simulator.html: Chart.js
+- import.html: none
+- tax-center.html: Chart.js
+- profile.html: Chart.js, jsPDF, jsPDF-autoTable, Razorpay Checkout
+- admin.html: none
+
+==================================================
+NOTES ON PREMIUM GATING (CONFIRMED FROM JS)
+==================================================
+
+Premium-required handling is explicitly coded in:
+- insights.js
+- health-score.js
+- import.js
+- simulator.js
+- subscriptions.js (auto-detection)
+- tax-center.js (advanced modules)
+
+Typical premium lock behavior:
+- Detect premium_required or upgrade_required error code.
+- Show lock card/message and upgrade CTA.
+- Keep shell functional so user can still navigate.
+
+==================================================
+END OF DOCUMENT
+==================================================

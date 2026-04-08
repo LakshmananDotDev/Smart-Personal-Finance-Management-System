@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Login - Finyx</title>
+    <link rel="stylesheet" href="css/base.css?v=4">
+    <link rel="stylesheet" href="css/auth.css?v=2">
+</head>
+<body>
+    <div class="auth-page">
+        <div class="auth-visual">
+            <div class="auth-visual-content">
+                <div class="auth-visual-icon">
+                    <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M12 2l3.2 6.5L22 9.3l-5 4.8 1.2 6.8L12 17.9l-6.2 3 1.2-6.8-5-4.8 6.8-.8L12 2z"></path>
+                    </svg>
+                </div>
+                <h2>Admin Console</h2>
+                <p>Monitor platform health, manage users, and review audit activity from one secure place.</p>
+            </div>
+        </div>
+
+        <div class="auth-form-side">
+            <div class="auth-form-container">
+                <a href="index.html" class="auth-logo">
+                    <div class="nav-logo-icon" style="width:32px;height:32px;display:flex;align-items:center;justify-content:center;">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--color-primary-text)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M6 3h12l4 6-10 13L2 9z"></path><path d="M2 9h20"></path><path d="M10 3l-4 6 6 13 6-13-4-6"></path>
+                        </svg>
+                    </div>
+                    Finyx
+                </a>
+
+                <h1 class="auth-title">Admin Login</h1>
+                <p class="auth-subtitle">Sign in with your admin email and password.</p>
+
+                <div class="auth-error" id="adminAuthError"></div>
+
+                <form class="auth-form" id="adminLoginForm" novalidate>
+                    <div class="form-group has-icon">
+                        <label class="form-label" for="adminEmail">Email Address</label>
+                        <svg class="form-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
+                        <input type="email" id="adminEmail" name="email" placeholder="admin@company.com" required autocomplete="email">
+                    </div>
+
+                    <div class="form-group has-icon">
+                        <label class="form-label" for="adminPassword">Password</label>
+                        <svg class="form-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg>
+                        <input type="password" id="adminPassword" name="password" placeholder="Enter admin password" required autocomplete="current-password">
+                    </div>
+
+                    <button type="submit" class="btn btn-primary btn-lg" id="adminLoginBtn" style="width:100%;margin-top:0.5rem">
+                        <span class="btn-text">Sign In as Admin</span>
+                        <span class="spinner" style="display:none" id="adminLoginSpinner"></span>
+                    </button>
+                </form>
+
+                <p class="auth-footer">
+                    User account? <a href="login.html">Go to User Login</a>
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <script src="js/api.js"></script>
+    <script src="js/utils.js?v=7"></script>
+    <script src="js/admin-login.js?v=1"></script>
+</body>
+</html>

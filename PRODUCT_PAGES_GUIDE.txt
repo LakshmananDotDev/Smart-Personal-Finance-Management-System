@@ -1,0 +1,459 @@
+NEXTGEN SMART FINANCE MANAGER (FINYX)
+PRODUCT GUIDE - DETAILED PAGE-BY-PAGE EXPLANATION
+
+==================================================
+1) PRODUCT OVERVIEW
+==================================================
+Finyx is a personal finance planning app designed to help users control day-to-day spending and improve long-term financial outcomes.
+
+The product is built around five practical outcomes:
+- Know exactly where money is coming from and going.
+- Stay within category budgets and avoid overspending.
+- Build savings habits through goal tracking and scenario planning.
+- Get intelligent guidance through insights, health scoring, and assistant support.
+- Make better tax decisions through India-focused deduction and regime comparisons.
+
+Finyx supports both individual users and platform administrators.
+- Individual users manage their own money, goals, reports, and preferences.
+- Admin users manage platform operations, user roles, and audit visibility.
+
+
+==================================================
+2) GLOBAL PRODUCT EXPERIENCE (ACROSS APP PAGES)
+==================================================
+A) Sidebar navigation
+- Acts as the primary movement system across the app.
+- Groups pages into: Overview, Manage, Analytics, and Tools.
+- Helps users switch from operational tasks (transactions, budgets) to strategic tasks (reports, insights, tax).
+
+B) Top bar controls
+- Shows the current page title and relevant quick actions.
+- Provides app-level personalization controls such as theme and font size.
+- Displays contextual status elements (date, plan badge, action buttons depending on page).
+
+C) Persistent account context
+- User identity, plan tier, and profile context are visible and consistently available.
+- Role-based page visibility ensures users only see relevant experiences.
+
+D) Notification and confirmation flow
+- The app uses clear success/warning/error feedback after major actions.
+- Users receive immediate confirmation for create/update/delete/import actions.
+
+E) Product tour
+- A guided walkthrough explains major pages and key value areas.
+- Useful for first-time users and for rediscovering advanced features.
+
+F) In-app AI assistant
+- Available inside the app as a contextual chatbot.
+- Answers app-related questions such as: where to perform actions, how to optimize spending, how to interpret insights, and what to do next.
+- Uses user context (plan, activity, spending patterns) to make responses more relevant.
+
+
+==================================================
+3) DETAILED PAGE EXPLANATIONS
+==================================================
+
+--------------------------------------------------
+PAGE 1: LANDING PAGE (index.html)
+--------------------------------------------------
+Primary purpose:
+- Introduce Finyx value clearly and convert visitors into registered users.
+
+What users can do:
+- Understand the core problem Finyx solves.
+- Review key product capabilities and value highlights.
+- Compare pricing plans.
+- Start signup or go to login.
+
+What the page communicates:
+- Finyx is focused on practical money planning, not complexity.
+- Users can budget, track recurring commitments, monitor goals, and receive AI-backed guidance.
+
+Who should use this page:
+- New visitors evaluating whether to adopt Finyx.
+
+
+--------------------------------------------------
+PAGE 2: LOGIN PAGE (login.html)
+--------------------------------------------------
+Primary purpose:
+- Authenticate existing users and return them to their financial workspace.
+
+What users can do:
+- Log in with email and password.
+- Use Google sign-in.
+- Navigate to signup if they do not have an account.
+- Navigate to admin login if they are platform staff.
+
+What the page communicates:
+- Fast, secure entry into the app.
+- Clear fallback paths for new users and admins.
+
+Who should use this page:
+- Returning users and platform team members.
+
+
+--------------------------------------------------
+PAGE 3: SIGNUP PAGE (signup.html)
+--------------------------------------------------
+Primary purpose:
+- Register new users and verify identity using email code flow.
+
+What users can do:
+- Enter personal account details.
+- Create credentials.
+- Request and submit email verification code.
+- Use Google sign-in as alternative onboarding path.
+
+What the page communicates:
+- Account creation is secure and verified.
+- Users can start free and move into full app usage quickly.
+
+Who should use this page:
+- First-time users creating a Finyx account.
+
+
+--------------------------------------------------
+PAGE 4: ONBOARDING PAGE (onboarding.html)
+--------------------------------------------------
+Primary purpose:
+- Give first-time users a structured introduction to the app and collect personalization inputs.
+
+What users can do:
+- Walk through product feature slides.
+- Understand what each major module does.
+- Set personal defaults such as currency and approximate monthly income.
+- Select a high-level financial focus.
+
+What the page communicates:
+- Finyx is organized into practical workflows: track, plan, optimize.
+- Personalization improves recommendation quality and relevance.
+
+Who should use this page:
+- New users during first login/setup.
+
+
+--------------------------------------------------
+PAGE 5: DASHBOARD (dashboard.html)
+--------------------------------------------------
+Primary purpose:
+- Provide a single-screen financial snapshot and fast decision support.
+
+What users can do:
+- Check current balance, income, expenses, and alert counts.
+- Review recent transactions and near-term financial signals.
+- View category and trend visuals.
+- Jump directly into detailed pages from summary cards.
+
+What users get from this page:
+- Immediate understanding of current financial health for the selected period.
+- Quick awareness of risk areas (overspending, upcoming commitments, weak savings momentum).
+
+Who should use this page:
+- Every user, daily or near-daily.
+
+
+--------------------------------------------------
+PAGE 6: TRANSACTIONS (transactions.html)
+--------------------------------------------------
+Primary purpose:
+- Act as the source-of-truth ledger for all money movement.
+
+What users can do:
+- Add income and expense entries.
+- Edit and maintain existing entries.
+- Filter by period and criteria to locate specific activity.
+- Review category-level spending contribution.
+- Track location-based spending activity where available.
+
+What users get from this page:
+- Clean historical record of money in/out.
+- Better spending visibility and more reliable downstream insights.
+
+Who should use this page:
+- Users who actively track daily spending and income.
+
+
+--------------------------------------------------
+PAGE 7: BUDGETS (budgets.html)
+--------------------------------------------------
+Primary purpose:
+- Help users set spending limits and enforce discipline by category.
+
+What users can do:
+- Create monthly category budgets.
+- Update or remove budgets as priorities change.
+- Monitor utilization percentages and warning states.
+- Identify categories nearing limit before overspend happens.
+
+What users get from this page:
+- Early warning system for spending drift.
+- Category-level control to improve savings outcomes.
+
+Who should use this page:
+- Users focused on monthly spending control.
+
+
+--------------------------------------------------
+PAGE 8: SAVINGS GOALS (goals.html)
+--------------------------------------------------
+Primary purpose:
+- Turn abstract financial ambitions into measurable progress plans.
+
+What users can do:
+- Create goals with target amount and optional deadline.
+- Add contributions over time.
+- Track progress percentage and remaining gap.
+- Manage multiple goals simultaneously.
+
+What users get from this page:
+- Clear progress visibility for each target.
+- Motivation through measurable milestones and deadlines.
+
+Who should use this page:
+- Users saving for events, purchases, emergency funds, or long-term milestones.
+
+
+--------------------------------------------------
+PAGE 9: SUBSCRIPTIONS (subscriptions.html)
+--------------------------------------------------
+Primary purpose:
+- Monitor recurring costs and reduce silent monthly leakage.
+
+What users can do:
+- Add recurring services manually.
+- Detect likely recurring payments from transaction behavior.
+- Confirm, modify, pause, or remove subscriptions.
+- Track upcoming renewals and recurring burden.
+
+What users get from this page:
+- Total monthly and annual recurring spend awareness.
+- Better control over low-value recurring commitments.
+
+Who should use this page:
+- Users with multiple recurring apps/services and autopay charges.
+
+
+--------------------------------------------------
+PAGE 10: ACCOUNTS (accounts.html)
+--------------------------------------------------
+Primary purpose:
+- Centralize account structure and balances across financial instruments.
+
+What users can do:
+- Add and maintain account records (bank, wallet, card, etc.).
+- Set default account behavior.
+- Review per-account balances and overall aggregated balance.
+
+What users get from this page:
+- Better organization of money sources and spending channels.
+- Cleaner transaction categorization and account-level control.
+
+Who should use this page:
+- Users managing money across multiple accounts/wallets/cards.
+
+
+--------------------------------------------------
+PAGE 11: REPORTS (reports.html)
+--------------------------------------------------
+Primary purpose:
+- Convert transaction history into strategic insights and trends.
+
+What users can do:
+- Switch report period (typically yearly focus with monthly trends).
+- Review income vs expense movement over time.
+- Analyze spending by category.
+- Use outputs for planning, reflection, and adjustment.
+
+What users get from this page:
+- High-level financial narrative of the selected period.
+- Better decision support for budget resets and savings planning.
+
+Who should use this page:
+- Users doing periodic financial reviews (monthly, quarterly, annual).
+
+
+--------------------------------------------------
+PAGE 12: AI INSIGHTS (insights.html)
+--------------------------------------------------
+Primary purpose:
+- Deliver prioritized, actionable guidance generated from user behavior and financial patterns.
+
+What users can do:
+- Review recommendations by urgency and impact.
+- Inspect behavior patterns and warning signals.
+- Use suggestions to take concrete next actions in other pages.
+
+What users get from this page:
+- Faster clarity on what to fix first.
+- Personalized recommendations instead of generic advice.
+
+Who should use this page:
+- Users who want decision shortcuts and optimization suggestions.
+
+
+--------------------------------------------------
+PAGE 13: HEALTH SCORE (health-score.html)
+--------------------------------------------------
+Primary purpose:
+- Quantify overall financial wellness through a composite score.
+
+What users can do:
+- View current score and quality band.
+- Understand factor-level contributions (for example savings behavior and budget discipline).
+- Follow improvement recommendations.
+
+What users get from this page:
+- A simple benchmark to track financial maturity over time.
+- Prioritized areas that would improve score fastest.
+
+Who should use this page:
+- Users who want a single outcome metric for personal financial health.
+
+
+--------------------------------------------------
+PAGE 14: WHAT-IF SIMULATOR (simulator.html)
+--------------------------------------------------
+Primary purpose:
+- Let users test hypothetical spending changes before making real decisions.
+
+What users can do:
+- Adjust category spend assumptions with controls.
+- Simulate future impact over a chosen horizon.
+- Compare baseline vs adjusted outcomes.
+
+What users get from this page:
+- Practical forecast of how behavior changes affect savings.
+- Confidence before committing to lifestyle or budget adjustments.
+
+Who should use this page:
+- Users evaluating trade-offs and planning future scenarios.
+
+
+--------------------------------------------------
+PAGE 15: TAX CENTER (tax-center.html)
+--------------------------------------------------
+Primary purpose:
+- Help Indian users plan taxes more intelligently using available deductions and regime comparisons.
+
+What users can do:
+- Track deduction sections and utilization.
+- Compare old vs new tax regime outcomes.
+- Review estimated liabilities and recommendation direction.
+- Follow actionable tax-saving suggestions.
+
+What users get from this page:
+- Better tax planning visibility before filing decisions.
+- Structured understanding of potential savings opportunities.
+
+Who should use this page:
+- Users who want tax-aware financial planning in India.
+
+
+--------------------------------------------------
+PAGE 16: IMPORT DATA (import.html)
+--------------------------------------------------
+Primary purpose:
+- Accelerate setup and data capture through bulk and assisted import flows.
+
+What users can do:
+- Upload CSV transaction files.
+- Preview data before final import.
+- Map fields and resolve format issues.
+- Detect duplicates to keep records clean.
+- Use receipt extraction flow to convert image/text inputs into transaction-ready data.
+
+What users get from this page:
+- Faster account setup and reduced manual entry.
+- Cleaner historical transaction dataset for analytics and AI guidance.
+
+Who should use this page:
+- New users migrating data, and existing users doing periodic bulk updates.
+
+
+--------------------------------------------------
+PAGE 17: PROFILE & SETTINGS (profile.html)
+--------------------------------------------------
+Primary purpose:
+- Manage user identity, preferences, plan information, and data controls.
+
+What users can do:
+- Update profile information.
+- Manage security settings and preferences.
+- Review plan state and upgrade context.
+- Export personal financial report/data.
+
+What users get from this page:
+- Full control of account personalization and ownership settings.
+- Access to product-level controls that affect overall app experience.
+
+Who should use this page:
+- All users for periodic account maintenance and customization.
+
+
+--------------------------------------------------
+PAGE 18: ADMIN LOGIN (admin-login.html)
+--------------------------------------------------
+Primary purpose:
+- Secure authentication gateway for platform operations users.
+
+What users can do:
+- Sign in with admin credentials.
+- Access operational controls after authorization.
+
+What the page communicates:
+- Administrative access is separated from member user login.
+
+Who should use this page:
+- Authorized platform administrators and support operations staff.
+
+
+--------------------------------------------------
+PAGE 19: ADMIN PANEL (admin.html)
+--------------------------------------------------
+Primary purpose:
+- Provide centralized platform operations and governance controls.
+
+What users can do:
+- Monitor business and usage KPIs.
+- Review and search user records.
+- Manage role and plan assignments.
+- Inspect operational activity history through audit visibility.
+
+What users get from this page:
+- Operational command center for platform health and secure account governance.
+
+Who should use this page:
+- Internal admin users only.
+
+
+==================================================
+4) CROSS-PAGE USER JOURNEY (PRACTICAL FLOW)
+==================================================
+Typical end-user journey in Finyx:
+1. Discover value on Landing page and create account.
+2. Complete onboarding personalization.
+3. Add/import transactions and set up accounts.
+4. Create budgets and savings goals.
+5. Track subscriptions and recurring obligations.
+6. Use dashboard daily for quick status checks.
+7. Use reports, insights, health score, and simulator weekly/monthly for optimization.
+8. Use tax center for periodic tax planning.
+9. Use profile/settings to manage identity, preferences, and exports.
+
+
+==================================================
+5) PRODUCT POSITIONING SUMMARY
+==================================================
+Finyx is a complete personal finance operating system for users who want practical control over cashflow, spending behavior, recurring obligations, savings progress, and tax planning.
+
+The product combines:
+- Operational control (transactions, budgets, subscriptions, accounts)
+- Strategic planning (goals, reports, simulator, tax center)
+- Intelligent assistance (AI insights, health score, in-app assistant)
+
+Result for users:
+- Better visibility
+- Faster decisions
+- Stronger money habits
+- Higher confidence in financial planning

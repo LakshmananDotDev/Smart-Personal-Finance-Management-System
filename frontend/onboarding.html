@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Welcome — Finyx</title>
+    <link rel="stylesheet" href="css/base.css?v=4" />
+    <link rel="stylesheet" href="css/onboarding.css?v=3" />
+</head>
+<body>
+    <div class="ob-backdrop">
+        <div class="ob-card">
+
+            <!-- Progress dots -->
+            <div class="ob-dots" id="obDots"></div>
+
+            <!-- Slide 1: Welcome -->
+            <div class="ob-slide active" data-slide="welcome">
+                <div class="ob-visual">
+                    <svg viewBox="0 0 120 120" fill="none"><circle cx="60" cy="60" r="56" stroke="var(--color-primary)" stroke-width="2" opacity="0.2"/><circle cx="60" cy="60" r="40" stroke="var(--color-primary)" stroke-width="2" opacity="0.35"/><path d="M60 28L42 50h12v20H66V50h12L60 28z" fill="var(--color-primary)" opacity="0.9"/><circle cx="60" cy="86" r="6" fill="var(--color-primary)"/></svg>
+                </div>
+                <h2>Welcome to Finyx</h2>
+                <p>Your AI-powered personal finance manager. Let's take a quick tour.</p>
+            </div>
+
+            <!-- Slide 2: Dashboard -->
+            <div class="ob-slide" data-slide="dashboard">
+                <div class="ob-visual">
+                    <div class="ob-mini-cards">
+                        <div class="ob-mc"><span class="ob-mc-icon" style="color:var(--color-success)">↑</span><span class="ob-mc-label">Income</span></div>
+                        <div class="ob-mc"><span class="ob-mc-icon" style="color:var(--color-danger)">↓</span><span class="ob-mc-label">Expenses</span></div>
+                        <div class="ob-mc"><span class="ob-mc-icon" style="color:var(--color-info)">◉</span><span class="ob-mc-label">Balance</span></div>
+                        <div class="ob-mc"><span class="ob-mc-icon" style="color:var(--color-warning)">⚠</span><span class="ob-mc-label">Alerts</span></div>
+                    </div>
+                </div>
+                <h2>Dashboard</h2>
+                <p>See your balance, income, expenses & budget alerts in one glance. Click any stat to dive deeper.</p>
+            </div>
+
+            <!-- Slide 3: Transactions & Budgets -->
+            <div class="ob-slide" data-slide="manage">
+                <div class="ob-visual">
+                    <div class="ob-icon-row">
+                        <div class="ob-ir-item"><div class="ob-ir-circle" style="--c:var(--color-primary)">💳</div><span>Transactions</span></div>
+                        <div class="ob-ir-item"><div class="ob-ir-circle" style="--c:var(--color-warning)">📊</div><span>Budgets</span></div>
+                        <div class="ob-ir-item"><div class="ob-ir-circle" style="--c:var(--color-info)">🎯</div><span>Goals</span></div>
+                    </div>
+                </div>
+                <h2>Track & Plan</h2>
+                <p>Log transactions, set monthly budgets per category, and create savings goals with deadlines.</p>
+            </div>
+
+            <!-- Slide 4: Subscriptions & Accounts -->
+            <div class="ob-slide" data-slide="organize">
+                <div class="ob-visual">
+                    <div class="ob-icon-row">
+                        <div class="ob-ir-item"><div class="ob-ir-circle" style="--c:var(--color-danger)">🔄</div><span>Subscriptions</span></div>
+                        <div class="ob-ir-item"><div class="ob-ir-circle" style="--c:var(--color-success)">🏦</div><span>Accounts</span></div>
+                        <div class="ob-ir-item"><div class="ob-ir-circle" style="--c:var(--chart-5)">📥</div><span>Import</span></div>
+                    </div>
+                </div>
+                <h2>Organize</h2>
+                <p>Track recurring charges, manage bank accounts, and import data via CSV or receipt scan.</p>
+            </div>
+
+            <!-- Slide 5: AI & Analytics -->
+            <div class="ob-slide" data-slide="analytics">
+                <div class="ob-visual">
+                    <div class="ob-gauge-wrap">
+                        <svg viewBox="0 0 100 60" class="ob-gauge"><path d="M10 55 A 45 45 0 0 1 90 55" fill="none" stroke="var(--color-border)" stroke-width="7" stroke-linecap="round"/><path d="M10 55 A 45 45 0 0 1 75 18" fill="none" stroke="var(--color-primary)" stroke-width="7" stroke-linecap="round"/></svg>
+                        <div class="ob-gauge-score">78</div>
+                        <div class="ob-gauge-label">Health Score</div>
+                    </div>
+                </div>
+                <h2>AI-Powered Insights</h2>
+                <p>Get a financial health score, personalized tips, spending analysis, and "What-If" simulations.</p>
+            </div>
+
+            <!-- Slide 6: Navigation -->
+            <div class="ob-slide" data-slide="navigation">
+                <div class="ob-visual">
+                    <div class="ob-nav-preview">
+                        <div class="ob-np-item active"><span>📌</span> Dashboard</div>
+                        <div class="ob-np-item"><span>💳</span> Transactions</div>
+                        <div class="ob-np-item"><span>📊</span> Budgets</div>
+                        <div class="ob-np-item"><span>🤖</span> AI Insights</div>
+                        <div class="ob-np-item"><span>📈</span> Reports</div>
+                        <div class="ob-np-item"><span>❤️</span> Health Score</div>
+                    </div>
+                </div>
+                <h2>Easy Navigation</h2>
+                <p>Use the sidebar to jump between sections. Click your avatar for Profile & Settings.</p>
+            </div>
+
+            <!-- Slide 7: Set Password (OAuth only — hidden for email users) -->
+            <div class="ob-slide" data-slide="password" id="passwordSlide">
+                <div class="ob-visual">
+                    <svg viewBox="0 0 120 120" fill="none"><rect x="30" y="50" width="60" height="45" rx="8" stroke="var(--color-primary)" stroke-width="2.5"/><path d="M45 50V38a15 15 0 0 1 30 0v12" stroke="var(--color-primary)" stroke-width="2.5" fill="none"/><circle cx="60" cy="72" r="5" fill="var(--color-primary)"/><line x1="60" y1="77" x2="60" y2="85" stroke="var(--color-primary)" stroke-width="2.5"/></svg>
+                </div>
+                <h2>Secure Your Account</h2>
+                <p>Set a password so you can also log in with email.</p>
+                <div class="ob-form">
+                    <input type="password" id="newPassword" placeholder="Password (min 6 chars)" autocomplete="new-password" />
+                    <div class="ob-str-row"><div class="ob-str-bar" id="str1"></div><div class="ob-str-bar" id="str2"></div><div class="ob-str-bar" id="str3"></div><div class="ob-str-bar" id="str4"></div></div>
+                    <input type="password" id="confirmPassword" placeholder="Confirm password" autocomplete="new-password" />
+                </div>
+            </div>
+
+            <!-- Slide 8: Personalize -->
+            <div class="ob-slide" data-slide="setup">
+                <div class="ob-visual compact">
+                    <svg viewBox="0 0 120 120" fill="none"><circle cx="60" cy="60" r="50" stroke="var(--color-primary)" stroke-width="2" opacity="0.2"/><circle cx="60" cy="45" r="16" stroke="var(--color-primary)" stroke-width="2.5" fill="none"/><path d="M32 95a28 28 0 0 1 56 0" stroke="var(--color-primary)" stroke-width="2.5" fill="none"/></svg>
+                </div>
+                <h2>Personalize</h2>
+                <p>Set your preferences to get tailored insights.</p>
+                <div class="ob-form">
+                    <select id="onboardCurrency">
+                        <option value="INR">₹ INR — Indian Rupee</option>
+                        <option value="USD">$ USD — US Dollar</option>
+                        <option value="EUR">€ EUR — Euro</option>
+                        <option value="GBP">£ GBP — British Pound</option>
+                        <option value="JPY">¥ JPY — Japanese Yen</option>
+                        <option value="CAD">$ CAD — Canadian Dollar</option>
+                        <option value="AUD">$ AUD — Australian Dollar</option>
+                    </select>
+                    <input type="number" id="onboardIncome" placeholder="Monthly income (approx.)" min="0" step="100" />
+                    <div class="ob-goals" id="goalOptions">
+                        <button class="ob-goal-btn" data-goal="save">💰 Save</button>
+                        <button class="ob-goal-btn" data-goal="invest">📈 Invest</button>
+                        <button class="ob-goal-btn" data-goal="budget">📋 Budget</button>
+                        <button class="ob-goal-btn" data-goal="track">🔍 Track</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Slide 9: Done -->
+            <div class="ob-slide" data-slide="done">
+                <div class="ob-visual">
+                    <svg viewBox="0 0 120 120" fill="none"><circle cx="60" cy="60" r="50" stroke="var(--color-primary)" stroke-width="3" opacity="0.25"/><circle cx="60" cy="60" r="36" fill="var(--color-primary-glow)"/><polyline points="42,62 54,74 78,48" fill="none" stroke="var(--color-primary)" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                </div>
+                <h2>You're All Set!</h2>
+                <p>Start by adding an account, logging a transaction, or setting a budget. The AI will do the rest.</p>
+            </div>
+
+            <!-- Error -->
+            <div class="ob-error" id="obError"></div>
+
+            <!-- Footer actions -->
+            <div class="ob-footer">
+                <button class="ob-skip" id="obSkip">Skip</button>
+                <div class="ob-spacer"></div>
+                <button class="ob-btn-back" id="obBack">←</button>
+                <button class="ob-btn-next" id="obNext">Next</button>
+            </div>
+
+        </div>
+    </div>
+
+    <script src="js/api.js"></script>
+    <script src="js/utils.js?v=7"></script>
+    <script src="js/onboarding.js"></script>
+</body>
+</html>
+
+
+
+
+
+

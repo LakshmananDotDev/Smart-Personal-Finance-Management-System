@@ -1,0 +1,388 @@
+/* ============================================================
+   ONBOARDING — Card carousel with graphical slides
+   ============================================================ */
+
+.ob-backdrop {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 1.5rem;
+    position: relative;
+    background: var(--color-bg);
+}
+
+.ob-backdrop::before {
+    content: '';
+    position: absolute;
+    top: 30%; left: 50%;
+    transform: translate(-50%, -50%);
+    width: 500px; height: 500px;
+    background: radial-gradient(circle, var(--color-primary-glow) 0%, transparent 70%);
+    pointer-events: none;
+}
+
+/* ── Card ── */
+.ob-card {
+    position: relative;
+    width: 100%;
+    max-width: 440px;
+    background: var(--color-bg-card);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-xl);
+    padding: 2rem 2rem 1.25rem;
+    box-shadow: var(--shadow-lg);
+    overflow: hidden;
+    z-index: 1;
+}
+
+/* ── Progress dots ── */
+.ob-dots {
+    display: flex;
+    justify-content: center;
+    gap: 6px;
+    margin-bottom: 1.75rem;
+}
+
+.ob-dot {
+    width: 8px; height: 8px;
+    border-radius: 50%;
+    background: var(--color-border);
+    transition: all var(--transition-fast);
+    cursor: pointer;
+}
+
+.ob-dot.active {
+    background: var(--color-primary);
+    width: 24px;
+    border-radius: 4px;
+}
+
+.ob-dot.visited {
+    background: var(--color-primary-dim);
+}
+
+/* ── Slides ── */
+.ob-slide {
+    display: none;
+    text-align: center;
+    animation: obSlideIn .3s ease;
+}
+
+.ob-slide.active { display: block; }
+
+@keyframes obSlideIn {
+    from { opacity: 0; transform: translateX(30px); }
+    to   { opacity: 1; transform: translateX(0); }
+}
+
+.ob-slide h2 {
+    font-family: var(--font-display);
+    font-size: 1.4rem;
+    font-weight: 700;
+    margin-bottom: 0.5rem;
+}
+
+.ob-slide p {
+    color: var(--color-text-secondary);
+    font-size: 0.875rem;
+    line-height: 1.6;
+    max-width: 360px;
+    margin: 0 auto 1rem;
+}
+
+/* ── Visual area ── */
+.ob-visual {
+    height: 160px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 1.25rem;
+}
+
+.ob-visual.compact { height: 100px; }
+
+.ob-visual > svg {
+    width: 120px;
+    height: 120px;
+}
+
+/* ── Mini stat cards (dashboard slide) ── */
+.ob-mini-cards {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 8px;
+    width: 220px;
+}
+
+.ob-mc {
+    background: var(--color-bg-elevated);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-md);
+    padding: 10px 8px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.ob-mc-icon { font-size: 1.1rem; }
+.ob-mc-label { font-size: 0.75rem; color: var(--color-text-secondary); }
+
+/* ── Icon row (track & organize slides) ── */
+.ob-icon-row {
+    display: flex;
+    gap: 1.25rem;
+    justify-content: center;
+}
+
+.ob-ir-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 6px;
+}
+
+.ob-ir-circle {
+    width: 56px; height: 56px;
+    border-radius: var(--radius-lg);
+    background: var(--color-bg-elevated);
+    border: 1.5px solid var(--c, var(--color-border));
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5rem;
+    transition: transform var(--transition-fast);
+}
+
+.ob-ir-circle:hover { transform: scale(1.08); }
+
+.ob-ir-item span:last-child {
+    font-size: 0.688rem;
+    color: var(--color-text-secondary);
+    font-weight: 500;
+}
+
+/* ── Gauge (health score slide) ── */
+.ob-gauge-wrap {
+    text-align: center;
+    position: relative;
+}
+
+.ob-gauge { width: 140px; }
+
+.ob-gauge-score {
+    font-family: var(--font-display);
+    font-size: 2rem;
+    font-weight: 700;
+    color: var(--color-primary);
+    margin-top: -10px;
+}
+
+.ob-gauge-label {
+    font-size: 0.688rem;
+    color: var(--color-text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+/* ── Nav preview (navigation slide) ── */
+.ob-nav-preview {
+    width: 180px;
+    background: var(--color-bg-elevated);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-md);
+    overflow: hidden;
+}
+
+.ob-np-item {
+    padding: 6px 12px;
+    font-size: 0.75rem;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    color: var(--color-text-secondary);
+    border-bottom: 1px solid var(--color-border-subtle);
+}
+
+.ob-np-item:last-child { border-bottom: none; }
+
+.ob-np-item.active {
+    background: var(--color-primary-glow);
+    color: var(--color-primary);
+    font-weight: 600;
+}
+
+.ob-np-item span { font-size: 0.875rem; }
+
+/* ── Form (password + setup slides) ── */
+.ob-form {
+    max-width: 300px;
+    margin: 0 auto;
+    text-align: left;
+}
+
+.ob-form input,
+.ob-form select {
+    width: 100%;
+    padding: 0.625rem 0.875rem;
+    background: var(--color-bg-input);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-md);
+    color: var(--color-text);
+    font-size: 0.875rem;
+    font-family: var(--font-body);
+    margin-bottom: 0.625rem;
+    transition: border-color var(--transition-fast);
+}
+
+.ob-form input:focus,
+.ob-form select:focus {
+    outline: none;
+    border-color: var(--color-primary);
+}
+
+.ob-form select option {
+    background: var(--color-bg-card);
+}
+
+/* ── Password strength ── */
+.ob-str-row {
+    display: flex;
+    gap: 3px;
+    margin: -4px 0 8px;
+}
+
+.ob-str-bar {
+    flex: 1;
+    height: 3px;
+    background: var(--color-border);
+    border-radius: 2px;
+    transition: background var(--transition-fast);
+}
+
+.ob-str-bar.weak { background: var(--color-danger); }
+.ob-str-bar.medium { background: var(--color-warning); }
+.ob-str-bar.strong { background: var(--color-success); }
+
+/* ── Goal buttons ── */
+.ob-goals {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 6px;
+    margin-top: 4px;
+}
+
+.ob-goal-btn {
+    padding: 8px;
+    background: var(--color-bg-elevated);
+    border: 1.5px solid var(--color-border);
+    border-radius: var(--radius-md);
+    color: var(--color-text-secondary);
+    font-size: 0.813rem;
+    font-family: var(--font-body);
+    cursor: pointer;
+    transition: all var(--transition-fast);
+}
+
+.ob-goal-btn:hover {
+    border-color: var(--color-text-muted);
+}
+
+.ob-goal-btn.selected {
+    border-color: var(--color-primary);
+    background: var(--color-primary-glow);
+    color: var(--color-text);
+}
+
+/* ── Error ── */
+.ob-error {
+    color: var(--color-danger);
+    font-size: 0.813rem;
+    text-align: center;
+    margin-top: 0.5rem;
+    min-height: 1.2em;
+}
+
+/* ── Footer ── */
+.ob-footer {
+    display: flex;
+    align-items: center;
+    margin-top: 1.25rem;
+    padding-top: 1rem;
+    border-top: 1px solid var(--color-border);
+}
+
+.ob-spacer { flex: 1; }
+
+.ob-skip {
+    background: none;
+    border: none;
+    color: var(--color-text-muted);
+    font-size: 0.813rem;
+    font-family: var(--font-body);
+    cursor: pointer;
+    padding: 0.5rem 0.75rem;
+    transition: color var(--transition-fast);
+}
+
+.ob-skip:hover { color: var(--color-text-secondary); }
+
+.ob-btn-back {
+    width: 36px; height: 36px;
+    border-radius: var(--radius-md);
+    background: var(--color-bg-elevated);
+    border: 1px solid var(--color-border);
+    color: var(--color-text-secondary);
+    font-size: 1rem;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-right: 8px;
+    transition: all var(--transition-fast);
+}
+
+.ob-btn-back:hover {
+    border-color: var(--color-text-muted);
+    color: var(--color-text);
+}
+
+.ob-btn-back:disabled {
+    opacity: 0.3;
+    cursor: default;
+}
+
+.ob-btn-next {
+    padding: 0.55rem 1.5rem;
+    background: var(--color-primary);
+    color: var(--color-primary-text);
+    border: none;
+    border-radius: var(--radius-md);
+    font-size: 0.875rem;
+    font-weight: 600;
+    font-family: var(--font-body);
+    cursor: pointer;
+    transition: background var(--transition-fast);
+}
+
+.ob-btn-next:hover {
+    background: var(--color-primary-dim);
+}
+
+.ob-btn-next:disabled {
+    opacity: 0.5;
+    cursor: default;
+}
+
+/* ── Responsive ── */
+@media (max-width: 480px) {
+    .ob-card {
+        padding: 1.5rem 1.25rem 1rem;
+        border-radius: var(--radius-lg);
+    }
+
+    .ob-visual { height: 130px; }
+    .ob-mini-cards { width: 190px; }
+    .ob-slide h2 { font-size: 1.2rem; }
+}
+

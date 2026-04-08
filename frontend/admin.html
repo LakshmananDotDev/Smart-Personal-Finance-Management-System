@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Panel - Finyx</title>
+    <link rel="stylesheet" href="css/base.css?v=4">
+    <link rel="stylesheet" href="css/app.css?v=10">
+</head>
+<body>
+    <div class="app-layout">
+        <aside class="sidebar" id="sidebar">
+            <a href="index.html" class="sidebar-header" style="text-decoration:none;color:inherit;">
+                <div class="sidebar-logo-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 3h12l4 6-10 13L2 9z"></path><path d="M2 9h20"></path><path d="M10 3l-4 6 6 13 6-13-4-6"></path></svg></div>
+                <span class="sidebar-logo">Finyx</span>
+            </a>
+
+            <nav class="sidebar-nav">
+                <div class="sidebar-section">
+                    <div class="sidebar-section-title">Overview</div>
+                    <a href="profile.html" class="sidebar-link"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg> Profile</a>
+                </div>
+            </nav>
+
+            <div class="sidebar-footer">
+                <div class="sidebar-link" id="themeToggle" style="cursor:pointer"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg> <span id="themeLabel">Dark Mode</span></div>
+                <div class="sidebar-link" id="logoutBtn" style="cursor:pointer;color:var(--color-danger)"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path><polyline points="16 17 21 12 16 7"></polyline><line x1="21" y1="12" x2="9" y2="12"></line></svg> Logout</div>
+                <a href="profile.html" class="sidebar-user" id="sidebarUser" style="text-decoration:none;color:inherit">
+                    <div class="sidebar-avatar" id="userAvatar">U</div>
+                    <div class="sidebar-user-info">
+                        <div class="sidebar-user-name" id="userName">User</div>
+                        <div class="sidebar-user-email" id="userEmail">user@email.com</div>
+                    </div>
+                </a>
+            </div>
+        </aside>
+
+        <div class="sidebar-backdrop" id="sidebarBackdrop"></div>
+
+        <main class="main-content">
+            <header class="main-header">
+                <div class="main-header-left">
+                    <button class="menu-toggle" id="menuToggle">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg>
+                    </button>
+                    <h1 class="main-header-title">Admin Panel</h1>
+                </div>
+                <div class="main-header-right">
+                    <span class="text-secondary" id="currentDate" style="font-size:0.875rem"></span>
+                </div>
+            </header>
+
+            <div class="page-content">
+                <div class="page-context">
+                    <div class="page-context-icon" style="background:var(--color-warning)">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2l3.2 6.5L22 9.3l-5 4.8 1.2 6.8L12 17.9l-6.2 3 1.2-6.8-5-4.8 6.8-.8L12 2z"></path></svg>
+                    </div>
+                    <div>
+                        <h3 class="page-context-title">Platform Operations</h3>
+                        <p class="page-context-desc">Track business KPIs, monitor user growth, manage user permissions, and review audit activity for secure operations.</p>
+                    </div>
+                </div>
+
+                <div class="dashboard-overview admin-kpi-grid">
+                    <div class="card stat-card">
+                        <div class="card-header"><span class="card-title">Total Users</span></div>
+                        <div class="card-value" id="adminTotalUsers">0</div>
+                    </div>
+                    <div class="card stat-card">
+                        <div class="card-header"><span class="card-title">Premium Users</span></div>
+                        <div class="card-value" id="adminPremiumUsers">0</div>
+                    </div>
+                    <div class="card stat-card">
+                        <div class="card-header"><span class="card-title">Transactions This Month</span></div>
+                        <div class="card-value" id="adminTransactionsMonth">0</div>
+                    </div>
+                    <div class="card stat-card">
+                        <div class="card-header"><span class="card-title">Estimated MRR</span></div>
+                        <div class="card-value" id="adminEstimatedMrr">Rs.0.00</div>
+                    </div>
+                </div>
+
+                <div class="dashboard-bottom" style="margin-top:1.5rem">
+                    <div class="card admin-users-card">
+                        <div class="card-header" style="gap:0.75rem;flex-wrap:wrap">
+                            <span class="card-title">User Access Management</span>
+                            <div class="admin-user-filters">
+                                <input type="text" id="adminUserSearch" placeholder="Search users by name/email" class="admin-filter-input">
+                                <select id="adminRoleFilter" class="admin-filter-select">
+                                    <option value="">All Roles</option>
+                                    <option value="member">Member</option>
+                                    <option value="support">Support</option>
+                                    <option value="admin">Admin</option>
+                                </select>
+                                <select id="adminPlanFilter" class="admin-filter-select">
+                                    <option value="">All Plans</option>
+                                    <option value="basic">Basic</option>
+                                    <option value="premium">Premium</option>
+                                </select>
+                                <button class="btn btn-outline btn-sm" id="adminUsersRefreshBtn">Refresh</button>
+                            </div>
+                        </div>
+                        <div class="admin-users-meta" id="adminUsersMeta">Loading users...</div>
+                        <div class="admin-table-wrap">
+                            <table class="admin-table">
+                                <thead>
+                                    <tr>
+                                        <th>User</th>
+                                        <th>Role</th>
+                                        <th>Plan</th>
+                                        <th>Active</th>
+                                        <th>Signals</th>
+                                        <th>Action</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="adminUsersTableBody"></tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="dashboard-bottom" style="margin-top:1.5rem">
+                    <div class="card">
+                        <div class="card-header">
+                            <span class="card-title">Recent Audit Activity</span>
+                            <button class="btn btn-outline btn-sm" id="adminAuditRefreshBtn">Reload Logs</button>
+                        </div>
+                        <div id="adminAuditList" class="admin-audit-list">
+                            <div class="text-secondary" style="font-size:0.875rem">Loading audit logs...</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <div class="toast-container" id="toastContainer"></div>
+
+    <script src="js/api.js"></script>
+    <script src="js/utils.js?v=7"></script>
+    <script src="js/app.js"></script>
+    <script src="js/admin.js?v=1"></script>
+</body>
+</html>

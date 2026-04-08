@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Profile — Finyx</title>
+    <link rel="stylesheet" href="css/base.css?v=4">
+    <link rel="stylesheet" href="css/app.css?v=6">
+</head>
+<body>
+    <div class="app-layout">
+        <aside class="sidebar" id="sidebar">
+            <a href="index.html" class="sidebar-header" style="text-decoration:none;color:inherit;">
+                <div class="sidebar-logo-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 3h12l4 6-10 13L2 9z"></path><path d="M2 9h20"></path><path d="M10 3l-4 6 6 13 6-13-4-6"></path></svg></div>
+                <span class="sidebar-logo">Finyx</span>
+            </a>
+            <nav class="sidebar-nav">
+                <div class="sidebar-section">
+                    <div class="sidebar-section-title">Overview</div>
+                    <a href="dashboard.html" class="sidebar-link"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7"></rect><rect x="14" y="3" width="7" height="7"></rect><rect x="14" y="14" width="7" height="7"></rect><rect x="3" y="14" width="7" height="7"></rect></svg> Dashboard</a>
+                </div>
+                <div class="sidebar-section">
+                    <div class="sidebar-section-title">Manage</div>
+                    <a href="transactions.html" class="sidebar-link"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="1" x2="12" y2="23"></line><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path></svg> Transactions</a>
+                    <a href="budgets.html" class="sidebar-link"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="7" width="20" height="14" rx="2" ry="2"></rect><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"></path></svg> Budgets</a>
+                    <a href="goals.html" class="sidebar-link"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"></path></svg> Savings Goals</a>
+                    <a href="subscriptions.html" class="sidebar-link"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12V7H5a2 2 0 0 1 0-4h14v4"></path><path d="M3 5v14a2 2 0 0 0 2 2h16v-5"></path><path d="M18 12a2 2 0 0 0 0 4h4v-4Z"></path></svg> Subscriptions</a>
+                    <a href="accounts.html" class="sidebar-link"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="1" y="4" width="22" height="16" rx="2" ry="2"></rect><line x1="1" y1="10" x2="23" y2="10"></line></svg> Accounts</a>
+                </div>
+                <div class="sidebar-section">
+                    <div class="sidebar-section-title">Analytics</div>
+                    <a href="reports.html" class="sidebar-link"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="20" x2="18" y2="10"></line><line x1="12" y1="20" x2="12" y2="4"></line><line x1="6" y1="20" x2="6" y2="14"></line></svg> Reports</a>
+                    <a href="insights.html" class="sidebar-link"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="16" x2="12" y2="12"></line><line x1="12" y1="8" x2="12.01" y2="8"></line></svg> AI Insights</a>
+                    <a href="health-score.html" class="sidebar-link"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg> Health Score</a>
+                    <a href="simulator.html" class="sidebar-link"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 2v20h20"></path><polyline points="6 16 10 8 14 14 18 6"></polyline></svg> Simulator</a>
+                </div>
+                <div class="sidebar-section">
+                    <div class="sidebar-section-title">Tools</div>
+                    <a href="import.html" class="sidebar-link"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="17 8 12 3 7 8"></polyline><line x1="12" y1="3" x2="12" y2="15"></line></svg> Import Data</a>
+                </div>
+            </nav>
+            <div class="sidebar-footer">
+                <div class="sidebar-link" id="themeToggle" style="cursor:pointer"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg> <span id="themeLabel">Dark Mode</span></div>
+                <div class="sidebar-link" id="logoutBtn" style="cursor:pointer;color:var(--color-danger)"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path><polyline points="16 17 21 12 16 7"></polyline><line x1="21" y1="12" x2="9" y2="12"></line></svg> Logout</div>
+                <a href="profile.html" class="sidebar-user" id="sidebarUser" style="text-decoration:none;color:inherit">
+                    <div class="sidebar-avatar" id="userAvatar">U</div>
+                    <div class="sidebar-user-info">
+                        <div class="sidebar-user-name" id="userName">User</div>
+                        <div class="sidebar-user-email" id="userEmail">user@email.com</div>
+                    </div>
+                </a>
+            </div>
+        </aside>
+
+        <div class="sidebar-backdrop" id="sidebarBackdrop"></div>
+
+        <main class="main-content">
+            <header class="main-header">
+                <div class="main-header-left">
+                    <button class="menu-toggle" id="menuToggle"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg></button>
+                    <h1 class="main-header-title">Profile & Settings</h1>
+                </div>
+                <div class="main-header-right">
+                    <span class="text-secondary" id="currentDate" style="font-size:0.875rem"></span>
+                </div>
+            </header>
+
+            <div class="page-content">
+                <div class="page-context profile-context">
+                    <div class="page-context-icon profile-context-icon">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
+                    </div>
+                    <div>
+                        <h3 class="page-context-title">Profile & Settings</h3>
+                        <p class="page-context-desc">Update your personal details, change your password, configure notification preferences, and export your financial data whenever you need it.</p>
+                    </div>
+                </div>
+
+                <div class="profile-layout">
+                    <!-- Profile Hero -->
+                    <div class="card profile-card profile-hero-card animate-fade-in-up stagger-1">
+                        <div class="profile-avatar-section">
+                            <div class="profile-avatar" id="profileAvatar">U</div>
+                            <div class="profile-avatar-info">
+                                <p class="profile-eyebrow">Personal HQ</p>
+                                <h2 class="profile-name" id="profileName">User</h2>
+                                <p class="profile-email text-secondary" id="profileEmail">user@email.com</p>
+                                <div class="profile-meta-row">
+                                    <span class="profile-meta-chip" id="heroPlanPill">Basic Member</span>
+                                    <span class="profile-meta-chip profile-meta-chip-muted" id="profileJoined">Joined —</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="profile-hero-panel" aria-hidden="true">
+                            <div class="profile-hero-panel-title">Finance Command Center</div>
+                            <div class="profile-hero-stats">
+                                <div class="profile-hero-stat">
+                                    <span>Security</span>
+                                    <strong>Protected</strong>
+                                </div>
+                                <div class="profile-hero-stat">
+                                    <span>Data Export</span>
+                                    <strong>Ready</strong>
+                                </div>
+                                <div class="profile-hero-stat">
+                                    <span>AI Mode</span>
+                                    <strong>Smart</strong>
+                                </div>
+                                <div class="profile-hero-stat">
+                                    <span>Sync</span>
+                                    <strong>Realtime</strong>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Settings Sections -->
+                    <div class="profile-sections">
+                        <!-- Personal Info -->
+                        <div class="card profile-section-card profile-card-personal animate-fade-in-up stagger-2">
+                            <div class="card-header">
+                                <span class="card-title profile-card-title">
+                                    <span class="profile-card-title-icon" aria-hidden="true">
+                                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
+                                    </span>
+                                    Personal Information
+                                </span>
+                                <button class="btn btn-ghost btn-sm" id="editPersonalBtn">
+                                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"></path></svg>
+                                    Edit
+                                </button>
+                            </div>
+                            <form id="personalForm">
+                                <div class="form-row">
+                                    <div class="form-group">
+                                        <label class="form-label" for="firstName">First Name</label>
+                                        <input type="text" id="firstName" disabled>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="form-label" for="lastName">Last Name</label>
+                                        <input type="text" id="lastName" disabled>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="form-label" for="emailField">Email</label>
+                                    <input type="email" id="emailField" class="profile-email-locked" disabled title="Email cannot be changed">
+                                </div>
+                                <div class="form-group">
+                                    <label class="form-label" for="avatarUrl">Avatar URL</label>
+                                    <input type="url" id="avatarUrl" placeholder="https://example.com/avatar.jpg" disabled>
+                                </div>
+                                <div class="profile-form-actions" id="personalActions" style="display:none">
+                                    <button type="button" class="btn btn-outline btn-sm" id="cancelPersonalBtn">Cancel</button>
+                                    <button type="submit" class="btn btn-primary btn-sm">Save Changes</button>
+                                </div>
+                            </form>
+                        </div>
+
+                        <!-- Preferences -->
+                        <div class="card profile-section-card profile-card-preferences animate-fade-in-up stagger-3">
+                            <div class="card-header">
+                                <span class="card-title profile-card-title">
+                                    <span class="profile-card-title-icon" aria-hidden="true">
+                                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"></circle><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 1 1-4 0v-.09a1.65 1.65 0 0 0-1-1.51 1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 1 1 0-4h.09a1.65 1.65 0 0 0 1.51-1 1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06a1.65 1.65 0 0 0 1.82.33h.01a1.65 1.65 0 0 0 1-1.51V3a2 2 0 1 1 4 0v.09a1.65 1.65 0 0 0 1 1.51h.01a1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82v.01a1.65 1.65 0 0 0 1.51 1H21a2 2 0 1 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"></path></svg>
+                                    </span>
+                                    Preferences
+                                </span>
+                            </div>
+                            <div class="preference-list">
+                                <div class="preference-item">
+                                    <div>
+                                        <div class="preference-label">Currency</div>
+                                        <div class="preference-desc">Display currency for amounts</div>
+                                    </div>
+                                    <select id="currencySelect" class="profile-pref-select profile-pref-select-sm">
+                                        <option value="INR">₹ INR</option>
+                                        <option value="USD">$ USD</option>
+                                        <option value="EUR">€ EUR</option>
+                                        <option value="GBP">£ GBP</option>
+                                    </select>
+                                </div>
+                                <div class="preference-item">
+                                    <div>
+                                        <div class="preference-label">Theme</div>
+                                        <div class="preference-desc">Choose your preferred appearance</div>
+                                    </div>
+                                    <select id="themeSelect" class="profile-pref-select profile-pref-select-sm">
+                                        <option value="dark">Dark</option>
+                                        <option value="light">Light</option>
+                                    </select>
+                                </div>
+                                <div class="preference-item">
+                                    <div>
+                                        <div class="preference-label">Default Account</div>
+                                        <div class="preference-desc">Used for new transactions</div>
+                                    </div>
+                                    <select id="defaultAccountSelect" class="profile-pref-select profile-pref-select-md">
+                                        <option value="">None</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Premium Membership -->
+                        <div class="card profile-section-card profile-card-premium profile-premium-card animate-fade-in-up stagger-4">
+                            <div class="card-header profile-header-split">
+                                <span class="card-title profile-card-title">
+                                    <span class="profile-card-title-icon" aria-hidden="true">
+                                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 3h12l4 6-10 13L2 9z"></path><path d="M2 9h20"></path></svg>
+                                    </span>
+                                    Premium Membership
+                                </span>
+                                <span class="badge" id="planBadge">Plan: Basic</span>
+                            </div>
+                            <div class="preference-list">
+                                <div class="preference-item premium-item">
+                                    <div>
+                                        <div class="preference-label" id="planStatusLabel">Unlock premium intelligence and automation</div>
+                                        <div class="preference-desc" id="planStatusDesc">Upgrade to access full AI insights, simulator projections, health score, and advanced tax optimization.</div>
+                                        <div class="text-muted profile-premium-expiry" id="premiumExpiryText"></div>
+                                    </div>
+                                    <div class="premium-actions">
+                                        <button type="button" class="btn btn-primary btn-sm" id="upgradeMonthlyBtn">Upgrade Monthly - Rs.149</button>
+                                        <button type="button" class="btn btn-outline btn-sm" id="upgradeYearlyBtn">Upgrade Yearly - Rs.1499</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Security -->
+                        <div class="card profile-section-card profile-card-security animate-fade-in-up stagger-5">
+                            <div class="card-header">
+                                <span class="card-title profile-card-title">
+                                    <span class="profile-card-title-icon" aria-hidden="true">
+                                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2l7 4v6c0 5-3.5 9.5-7 10-3.5-.5-7-5-7-10V6l7-4z"></path></svg>
+                                    </span>
+                                    Security
+                                </span>
+                            </div>
+                            <form id="passwordForm">
+                                <div class="form-group">
+                                    <label class="form-label" for="currentPassword">Current Password</label>
+                                    <input type="password" id="currentPassword" placeholder="Enter current password" autocomplete="current-password">
+                                </div>
+                                <div class="form-row">
+                                    <div class="form-group">
+                                        <label class="form-label" for="newPassword">New Password</label>
+                                        <input type="password" id="newPassword" placeholder="Min 6 characters" autocomplete="new-password">
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="form-label" for="confirmPassword">Confirm Password</label>
+                                        <input type="password" id="confirmPassword" placeholder="Re-enter password" autocomplete="new-password">
+                                    </div>
+                                </div>
+                                <div class="profile-form-actions">
+                                    <button type="submit" class="btn btn-primary btn-sm">Change Password</button>
+                                </div>
+                            </form>
+                        </div>
+
+                        <!-- Data & Account -->
+                        <div class="card profile-section-card profile-card-data animate-fade-in-up stagger-6">
+                            <div class="card-header">
+                                <span class="card-title profile-card-title">
+                                    <span class="profile-card-title-icon" aria-hidden="true">
+                                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>
+                                    </span>
+                                    Data & Account
+                                </span>
+                            </div>
+                            <div class="preference-list">
+                                <div class="preference-item profile-export-item">
+                                    <div class="profile-export-top">
+                                        <div>
+                                            <div class="preference-label">Export Report (PDF)</div>
+                                            <div class="preference-desc">Download a styled financial report</div>
+                                        </div>
+                                    </div>
+                                    <div class="profile-export-controls">
+                                        <select id="exportType" class="input profile-export-select">
+                                            <option value="monthly">Monthly</option>
+                                            <option value="yearly">Yearly</option>
+                                        </select>
+                                        <select id="exportMonth" class="input profile-export-select">
+                                            <option value="1">January</option>
+                                            <option value="2">February</option>
+                                            <option value="3">March</option>
+                                            <option value="4">April</option>
+                                            <option value="5">May</option>
+                                            <option value="6">June</option>
+                                            <option value="7">July</option>
+                                            <option value="8">August</option>
+                                            <option value="9">September</option>
+                                            <option value="10">October</option>
+                                            <option value="11">November</option>
+                                            <option value="12">December</option>
+                                        </select>
+                                        <select id="exportYear" class="input profile-export-select profile-export-select-year"></select>
+                                        <button class="btn btn-outline btn-sm profile-export-btn" id="exportDataBtn">
+                                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>
+                                            Export PDF
+                                        </button>
+                                    </div>
+                                </div>
+                                <div class="preference-item profile-danger-item">
+                                    <div>
+                                        <div class="preference-label profile-danger-label">Delete Account</div>
+                                        <div class="preference-desc">Permanently delete your account and all data</div>
+                                    </div>
+                                    <button class="btn btn-danger btn-sm" id="deleteAccountBtn">Delete</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- Delete Confirmation Modal -->
+    <div class="modal-overlay" id="deleteConfirmModal">
+        <div class="modal">
+            <div class="modal-header">
+                <h3 class="modal-title">Delete Account</h3>
+                <button class="btn btn-ghost btn-icon" id="closeDeleteModal">&times;</button>
+            </div>
+            <p style="color:var(--color-text-secondary);margin-bottom:1.5rem">This action is <strong style="color:var(--color-danger)">irreversible</strong>. All your data including transactions, budgets, goals, and subscriptions will be permanently deleted.</p>
+            <div class="form-group">
+                <label class="form-label">Type <strong>DELETE</strong> to confirm</label>
+                <input type="text" id="deleteConfirmInput" placeholder="Type DELETE">
+            </div>
+            <div style="display:flex;gap:0.75rem;justify-content:flex-end;margin-top:1rem">
+                <button class="btn btn-outline btn-sm" id="cancelDeleteBtn">Cancel</button>
+                <button class="btn btn-sm" id="confirmDeleteBtn" style="background:var(--color-danger);color:#fff" disabled>Delete My Account</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="toast-container" id="toastContainer"></div>
+
+    <!-- Hidden canvas for PDF chart rendering -->
+    <canvas id="pdfChartCanvas" width="800" height="400" style="position:absolute;left:-9999px;top:-9999px;"></canvas>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.4/dist/chart.umd.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/jspdf@2.5.2/dist/jspdf.umd.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/jspdf-autotable@3.8.4/dist/jspdf.plugin.autotable.min.js"></script>
+    <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+    <script src="js/api.js"></script>
+    <script src="js/utils.js?v=7"></script>
+    <script src="js/app.js"></script>
+    <script src="js/profile-export.js"></script>
+    <script src="js/profile.js?v=4"></script>
+</body>
+</html>
+
+
+
+
+

@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Accounts — Finyx</title>
+    <link rel="stylesheet" href="css/base.css?v=4">
+    <link rel="stylesheet" href="css/app.css?v=6">
+</head>
+<body>
+    <div class="app-layout">
+        <aside class="sidebar" id="sidebar">
+            <a href="index.html" class="sidebar-header" style="text-decoration:none;color:inherit;">
+                <div class="sidebar-logo-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 3h12l4 6-10 13L2 9z"></path><path d="M2 9h20"></path><path d="M10 3l-4 6 6 13 6-13-4-6"></path></svg></div>
+                <span class="sidebar-logo">Finyx</span>
+            </a>
+            <nav class="sidebar-nav">
+                <div class="sidebar-section">
+                    <div class="sidebar-section-title">Overview</div>
+                    <a href="dashboard.html" class="sidebar-link"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7"></rect><rect x="14" y="3" width="7" height="7"></rect><rect x="14" y="14" width="7" height="7"></rect><rect x="3" y="14" width="7" height="7"></rect></svg> Dashboard</a>
+                </div>
+                <div class="sidebar-section">
+                    <div class="sidebar-section-title">Manage</div>
+                    <a href="transactions.html" class="sidebar-link"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="1" x2="12" y2="23"></line><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path></svg> Transactions</a>
+                    <a href="budgets.html" class="sidebar-link"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="7" width="20" height="14" rx="2" ry="2"></rect><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"></path></svg> Budgets</a>
+                    <a href="goals.html" class="sidebar-link"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"></path></svg> Savings Goals</a>
+                    <a href="subscriptions.html" class="sidebar-link"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12V7H5a2 2 0 0 1 0-4h14v4"></path><path d="M3 5v14a2 2 0 0 0 2 2h16v-5"></path><path d="M18 12a2 2 0 0 0 0 4h4v-4Z"></path></svg> Subscriptions</a>
+                    <a href="accounts.html" class="sidebar-link active"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="1" y="4" width="22" height="16" rx="2" ry="2"></rect><line x1="1" y1="10" x2="23" y2="10"></line></svg> Accounts</a>
+                </div>
+                <div class="sidebar-section">
+                    <div class="sidebar-section-title">Analytics</div>
+                    <a href="reports.html" class="sidebar-link"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="20" x2="18" y2="10"></line><line x1="12" y1="20" x2="12" y2="4"></line><line x1="6" y1="20" x2="6" y2="14"></line></svg> Reports</a>
+                    <a href="insights.html" class="sidebar-link"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="16" x2="12" y2="12"></line><line x1="12" y1="8" x2="12.01" y2="8"></line></svg> AI Insights</a>
+                    <a href="health-score.html" class="sidebar-link"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg> Health Score</a>
+                    <a href="simulator.html" class="sidebar-link"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 2v20h20"></path><polyline points="6 16 10 8 14 14 18 6"></polyline></svg> Simulator</a>
+                </div>
+                <div class="sidebar-section">
+                    <div class="sidebar-section-title">Tools</div>
+                    <a href="import.html" class="sidebar-link"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="17 8 12 3 7 8"></polyline><line x1="12" y1="3" x2="12" y2="15"></line></svg> Import Data</a>
+                </div>
+            </nav>
+            <div class="sidebar-footer">
+                <div class="sidebar-link" id="themeToggle" style="cursor:pointer"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg> <span id="themeLabel">Dark Mode</span></div>
+                <div class="sidebar-link" id="logoutBtn" style="cursor:pointer;color:var(--color-danger)"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path><polyline points="16 17 21 12 16 7"></polyline><line x1="21" y1="12" x2="9" y2="12"></line></svg> Logout</div>
+                <div class="sidebar-user" id="sidebarUser">
+                    <div class="sidebar-avatar" id="userAvatar">U</div>
+                    <div class="sidebar-user-info">
+                        <div class="sidebar-user-name" id="userName">User</div>
+                        <div class="sidebar-user-email" id="userEmail">user@email.com</div>
+                    </div>
+                </div>
+            </div>
+        </aside>
+
+        <div class="sidebar-backdrop" id="sidebarBackdrop"></div>
+
+        <main class="main-content">
+            <header class="main-header">
+                <div class="main-header-left">
+                    <button class="menu-toggle" id="menuToggle"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg></button>
+                    <h1 class="main-header-title">Accounts</h1>
+                </div>
+                <div class="main-header-right">
+                    <span class="text-secondary" id="currentDate" style="font-size:0.875rem"></span>
+                </div>
+            </header>
+
+            <div class="page-content">
+                <div class="page-context">
+                    <div class="page-context-icon" style="background:#0ea5e9">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="1" y="4" width="22" height="16" rx="2" ry="2"></rect><line x1="1" y1="10" x2="23" y2="10"></line></svg>
+                    </div>
+                    <div>
+                        <h3 class="page-context-title">Account Management</h3>
+                        <p class="page-context-desc">Manage all your bank accounts, wallets, and credit cards in one place. Set a default account, monitor individual balances, and keep your finances organized.</p>
+                    </div>
+                </div>
+
+                <!-- Summary Cards -->
+                <div class="account-summary" id="accountSummary">
+                    <div class="card stat-card animate-fade-in-up stagger-1">
+                        <div class="card-header">
+                            <span class="card-title">Total Balance</span>
+                            <div class="stat-icon" style="background:var(--color-primary-glow);color:var(--color-primary)">💰</div>
+                        </div>
+                        <div class="card-value" id="totalBalance">₹0.00</div>
+                    </div>
+                    <div class="card stat-card animate-fade-in-up stagger-2">
+                        <div class="card-header">
+                            <span class="card-title">Total Accounts</span>
+                            <div class="stat-icon" style="background:rgba(79,195,247,0.12);color:var(--color-info)">🏦</div>
+                        </div>
+                        <div class="card-value" id="totalAccounts">0</div>
+                    </div>
+                    <div class="card stat-card animate-fade-in-up stagger-3">
+                        <div class="card-header">
+                            <span class="card-title">Default Account</span>
+                            <div class="stat-icon" style="background:rgba(245,166,35,0.12);color:var(--color-warning)">⭐</div>
+                        </div>
+                        <div class="card-value" id="defaultAccount" style="font-size:1.25rem">—</div>
+                    </div>
+                </div>
+
+                <!-- Header + Add Button -->
+                <div class="page-header" style="margin-top:1.5rem">
+                    <h2 class="page-title">Your Accounts</h2>
+                    <button class="btn btn-primary" id="addAccountBtn">+ Add Account</button>
+                </div>
+
+                <!-- Account Cards Grid -->
+                <div id="accountsGrid" class="accounts-grid">
+                    <div class="loading-screen"><div class="spinner"></div></div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- Add / Edit Account Modal -->
+    <div class="modal-overlay" id="accountModal">
+        <div class="modal">
+            <div class="modal-header">
+                <h2 class="modal-title" id="accountModalTitle">Add Account</h2>
+                <button class="btn btn-ghost btn-icon" id="closeAccountModal">&times;</button>
+            </div>
+            <form id="accountForm" autocomplete="off">
+                <input type="hidden" id="accountId">
+                <div class="form-group has-icon">
+                    <label class="form-label" for="accountName">Account Name</label>
+                    <svg class="form-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="1" y="4" width="22" height="16" rx="2" ry="2"></rect><line x1="1" y1="10" x2="23" y2="10"></line></svg>
+                    <input type="text" id="accountName" placeholder="e.g. SBI Savings" required>
+                </div>
+                <div class="form-row">
+                    <div class="form-group has-icon">
+                        <label class="form-label" for="accountType">Account Type</label>
+                        <svg class="form-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12V7H5a2 2 0 0 1 0-4h14v4"></path><path d="M3 5v14a2 2 0 0 0 2 2h16v-5"></path><path d="M18 12a2 2 0 0 0 0 4h4v-4Z"></path></svg>
+                        <select id="accountType" required>
+                            <option value="bank">Bank Account</option>
+                            <option value="cash">Cash</option>
+                            <option value="upi">UPI</option>
+                            <option value="credit">Credit Card</option>
+                            <option value="wallet">Digital Wallet</option>
+                        </select>
+                    </div>
+                    <div class="form-group has-icon">
+                        <label class="form-label" for="accountBalance">Balance</label>
+                        <svg class="form-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="1" x2="12" y2="23"></line><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path></svg>
+                        <input type="number" id="accountBalance" step="0.01" placeholder="0.00" required>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label class="form-label" for="accountColor">Color</label>
+                        <input type="color" id="accountColor" value="#6366f1">
+                    </div>
+                    <div class="form-group" style="display:flex;align-items:flex-end;padding-bottom:0.25rem">
+                        <label class="form-check">
+                            <input type="checkbox" id="accountDefault">
+                            <span class="form-check-label">Set as default</span>
+                        </label>
+                    </div>
+                </div>
+                <div class="modal-actions">
+                    <button type="button" class="btn btn-outline" id="cancelAccountBtn">Cancel</button>
+                    <button type="submit" class="btn btn-primary" id="saveAccountBtn">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                        Save Account
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <div class="toast-container" id="toastContainer"></div>
+
+    <script src="js/api.js"></script>
+    <script src="js/utils.js?v=7"></script>
+    <script src="js/app.js"></script>
+    <script src="js/accounts.js"></script>
+</body>
+</html>
+
+
+
+
+

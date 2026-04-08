@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign Up — Finyx</title>
+    <link rel="stylesheet" href="css/base.css?v=4">
+    <link rel="stylesheet" href="css/auth.css?v=2">
+    <script src="https://accounts.google.com/gsi/client" async defer></script>
+</head>
+<body>
+    <div class="auth-page">
+        <!-- Left visual panel -->
+        <div class="auth-visual">
+            <div class="auth-visual-content">
+                <div class="auth-visual-icon">
+                    <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"></path>
+                    </svg>
+                </div>
+                <h2>Start Your Journey</h2>
+                <p>Join thousands who are already making smarter financial decisions with AI-powered insights.</p>
+            </div>
+        </div>
+
+        <!-- Right form panel -->
+        <div class="auth-form-side">
+            <div class="auth-form-container">
+                <a href="index.html" class="auth-logo">
+                    <div class="nav-logo-icon" style="width:32px;height:32px;display:flex;align-items:center;justify-content:center;">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--color-primary-text)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M6 3h12l4 6-10 13L2 9z"></path><path d="M2 9h20"></path><path d="M10 3l-4 6 6 13 6-13-4-6"></path>
+                        </svg>
+                    </div>
+                    Finyx
+                </a>
+
+                <h1 class="auth-title">Create Account</h1>
+                <p class="auth-subtitle">Get started for free with email verification.</p>
+
+                <div class="auth-error" id="authError"></div>
+
+                <button type="button" class="btn-google" id="googleLoginBtn">
+                    <svg viewBox="0 0 24 24" width="20" height="20">
+                        <path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92a5.06 5.06 0 0 1-2.2 3.32v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.1z"/>
+                        <path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/>
+                        <path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z"/>
+                        <path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"/>
+                    </svg>
+                    Continue with Google
+                </button>
+
+                <div class="auth-divider">or</div>
+
+                <form class="auth-form" id="signupForm" novalidate>
+                    <div class="form-row">
+                        <div class="form-group has-icon">
+                            <label class="form-label" for="firstName">First Name</label>
+                            <svg class="form-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
+                            <input type="text" id="firstName" name="first_name" placeholder="John" required>
+                        </div>
+                        <div class="form-group has-icon">
+                            <label class="form-label" for="lastName">Last Name</label>
+                            <svg class="form-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
+                            <input type="text" id="lastName" name="last_name" placeholder="Doe">
+                        </div>
+                    </div>
+
+                    <div class="form-group has-icon">
+                        <label class="form-label" for="username">Username</label>
+                        <svg class="form-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="8.5" cy="7" r="4"></circle><line x1="20" y1="8" x2="20" y2="14"></line><line x1="23" y1="11" x2="17" y2="11"></line></svg>
+                        <input type="text" id="username" name="username" placeholder="johndoe" required>
+                    </div>
+
+                    <div class="form-group has-icon">
+                        <label class="form-label" for="email">Email Address</label>
+                        <svg class="form-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
+                        <input type="email" id="email" name="email" placeholder="you@example.com" required autocomplete="email">
+                    </div>
+
+                    <div class="form-group has-icon">
+                        <label class="form-label" for="password">Password</label>
+                        <svg class="form-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg>
+                        <input type="password" id="password" name="password" placeholder="Min. 8 characters" required autocomplete="new-password">
+                    </div>
+
+                    <div class="form-group has-icon">
+                        <label class="form-label" for="passwordConfirm">Confirm Password</label>
+                        <svg class="form-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg>
+                        <input type="password" id="passwordConfirm" name="password_confirm" placeholder="Re-enter password" required autocomplete="new-password">
+                    </div>
+
+                    <div class="form-group has-icon" id="signupOtpGroup" style="display:none">
+                        <label class="form-label" for="signupOtpCode">Email Verification Code</label>
+                        <svg class="form-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
+                        <input type="text" id="signupOtpCode" maxlength="6" inputmode="numeric" placeholder="Enter 6-digit code">
+                    </div>
+
+                    <p class="auth-otp-hint" id="signupOtpHint" style="display:none">We will send a verification code to your email.</p>
+
+                    <button type="submit" class="btn btn-primary btn-lg" id="signupBtn" style="width:100%;margin-top:0.5rem">
+                        <span class="btn-text">Send Verification Code</span>
+                        <span class="spinner" style="display:none" id="signupSpinner"></span>
+                    </button>
+                    <button type="button" class="btn btn-outline btn-lg" id="verifySignupOtpBtn" style="width:100%;margin-top:0.5rem;display:none">Verify Code &amp; Create Account</button>
+                </form>
+
+                <p class="auth-footer">
+                    Already have an account? <a href="login.html">Log in</a>
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <script src="js/api.js"></script>
+    <script src="js/utils.js?v=7"></script>
+    <script src="js/auth.js?v=3"></script>
+</body>
+</html>
+
+
+
+
+
